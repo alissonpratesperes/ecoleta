@@ -1,6 +1,6 @@
 import { Knex } from "knex";
 
-    export async function up (knex: Knex) {
+    export async function up(knex: Knex) {
         return knex.schema.createTable("points", table => {
             table.increments("id").primary();
 
@@ -14,7 +14,6 @@ import { Knex } from "knex";
 
             table.string("city").notNullable();
             table.string("uf", 2).notNullable();
-
         });
     }
 
