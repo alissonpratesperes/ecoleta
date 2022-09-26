@@ -60,7 +60,7 @@ import knex from "../database/connection";
             } = request.body;
 
             const point = {
-                image: "image-fake.jpg",
+                image: "https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
                 name,
                 email,
                 whatsapp,
