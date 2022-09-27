@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
+
+    * {
+        margin: 0px 0px 0px 0px;
+        padding: 0px 0px 0px 0px;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #F0F0F5;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    body, input, button {
+        font-family: Roboto, Arial, Arial, Helvetica, sans-serif;
+    }
+
+    h2, h3, h4, h5, h6 {
+        color: #322153;
+        font-family: Ubuntu;
+    }

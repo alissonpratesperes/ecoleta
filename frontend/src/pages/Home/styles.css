@@ -1,0 +1,87 @@
+div#home {
+    height: 100vh;
+    background-image: url("../../assets/home-background.svg");
+    background-repeat: no-repeat;
+    background-size: 650px;
+    background-position: bottom right;
+}
+
+div#home div.content {
+    margin: 0px auto 0px auto;
+    padding: 0px 30px 0px 30px;
+    height: 100%;
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+div#home div.content header {
+    margin: 48px 0px 0px 0px;
+}
+
+div#home div.content main {
+    flex: 1;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+div#home div.content main h1 {
+    font-family: Ubuntu;
+    font-size: 54px;
+    font-weight: 700;
+    color: #322153;
+}
+
+div#home div.content main p {
+    margin-top: 24px;
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: 400;
+    color: #6C6C80;
+    line-height: 38px;
+}
+
+div#home div.content main a {
+    margin-top: 48px;
+    height: 72px;
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 10px;
+    background-color: #34CB79;
+    overflow: hidden;
+    transition: background-color 0.3s;
+}
+
+div#home div.content main a span {
+    height: 72px;
+    width: 72px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #31B971;
+}
+
+div#home div.content main a span svg {
+    height: 25px;
+    width: 25px;
+    color: #FFFFFF;
+}
+
+div#home div.content main a strong {
+    flex: 1;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+div#home div.content main a:hover {
+    background-color: #31B971;
+}
