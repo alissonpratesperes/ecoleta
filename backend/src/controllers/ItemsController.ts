@@ -14,9 +14,9 @@ import knex from "../database/connection";
                 }
             });
 
-                return response.json(  
+                return response.status(200).json({
                     serializedItems
-                );
+                });
         }
     }
 

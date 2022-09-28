@@ -4,7 +4,11 @@ import knex from "../database/connection";
 
     class PointsController {
         async index(request: Request, response: Response) {
-            const { city, uf, items } = request.query;
+            const {
+                city,
+                uf,
+                items
+            } = request.query;
 
             const parsedItems = String(items)
                 .split(",")
@@ -18,21 +22,24 @@ import knex from "../database/connection";
                 .distinct()
                 .select("points.*");
 
-                    return response.json(
-                        points
-                    );
+                return response.status(200).json({
+                    points
+                });
         }
 
         async show(request: Request, response: Response) {
-            const { id } = request.params;
+            const {
+                id
+            } = request.params;
 
             const point = await knex("points")
                 .where("id", id)
                 .first();
             
                 if(!point) {
-                    return response.status(400).json({
-                        message: `Point ID ${id} not found on Database.`
+                    return response.status(404).json({
+                        message:
+                            `Point ID ${id} not found on Database.`
                     });
                 }
 
@@ -41,10 +48,10 @@ import knex from "../database/connection";
                 .where("point_items.point_id", id)
                 .select("items.title");
 
-                    return response.json({
-                        point,
-                        items
-                    });
+                return response.status(200).json({
+                    point,
+                    items
+                });
         }
 
         async create(request: Request, response: Response) {
@@ -85,10 +92,10 @@ import knex from "../database/connection";
                 await knex("point_items")
                     .insert(pointItems);        
 
-                        return response.json({
-                            id: point_id,
-                            ...point
-                        });
+                    return response.status(201).json({
+                        id: point_id,
+                        ...point
+                    });
         }
     }
 
