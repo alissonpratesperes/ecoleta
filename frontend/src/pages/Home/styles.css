@@ -57,7 +57,7 @@ div#home div.content main a {
     border-radius: 10px;
     background-color: #34CB79;
     overflow: hidden;
-    transition: background-color 0.3s;
+    transition: background-color 0.15s;
 }
 
 div#home div.content main a span {
