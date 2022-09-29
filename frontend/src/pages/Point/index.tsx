@@ -2,18 +2,32 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FiLogOut, FiSave } from "react-icons/fi";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import axios from "axios";
 
+import Item from "../../interfaces/Item";
+import FederativeUnit from "../../interfaces/FederativeUnit";
 import logo from "../../assets/logo.svg";
 import "./styles.css";
-import Item from "../../interfaces/Item";
 import api from "../../services/api";
 
     const Point = () => {
         const [items, setItems] = useState<Item[]>([]);
+        const [federativeUnits, setFederativeUnits] = useState<FederativeUnit[]>([]);
 
             useEffect(() => {
                 api.get("/items").then(response => {
                     setItems(response.data.serializedItems);
+                });
+            }, []);
+            useEffect(() => {
+                axios.get<FederativeUnit[]>("https://servicodados.ibge.gov.br/api/v1/localidades/estados").then(response => {
+                    const federativeUnitInitials = response.data.map(uf => {
+                        return {
+                            sigla: uf.sigla,
+                            nome: uf.nome
+                        }
+                    });
+                        setFederativeUnits(federativeUnitInitials);
                 });
             }, []);
 
@@ -56,9 +70,11 @@ import api from "../../services/api";
                                             </MapContainer>
                                                 <div className="field_group">
                                                     <div className="field">
-                                                        <label htmlFor="uf"> Estado (UF) </label>
+                                                        <label htmlFor="uf"> Unidade Federativa </label>
                                                             <select name="uf" id="uf">
-                                                                <option value="0"> Selecione uma UF </option>
+                                                                { federativeUnits.map(federativeUnit => (
+                                                                    <option key={ federativeUnit.sigla } value={ federativeUnit.sigla }> { federativeUnit.sigla } - { federativeUnit.nome } </option>
+                                                                )) }
                                                             </select>
                                                     </div>
                                                     <div className="field">
