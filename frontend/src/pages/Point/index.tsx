@@ -5,26 +5,29 @@ import { MapContainer, TileLayer, Marker } from "react-leaflet";
 
 import logo from "../../assets/logo.svg";
 import "./styles.css";
+import Item from "../../interfaces/Item";
 import api from "../../services/api";
 
     const Point = () => {
+        const [items, setItems] = useState<Item[]>([]);
+
             useEffect(() => {
                 api.get("/items").then(response => {
-                    console.log(response);
+                    setItems(response.data.serializedItems);
                 });
             }, []);
 
                 return (
                     <div id="create_point">
                         <header>
-                            <img src={logo} alt="Ecoleta"/>
+                            <img src={ logo } alt="Ecoleta"/>
                                 <Link to="/">
                                     <FiLogOut/>
                                         <strong> Voltar para a Home </strong>
                                 </Link>
                         </header>
                             <form>
-                                <h1> Cadastro do <br/> ponto de coleta </h1>
+                                <h1> Cadastro do <br/> ponto de coleta. </h1>
                                     <fieldset>
                                         <legend> <h2> Dados </h2> </legend>
                                             <div className="field">
@@ -47,9 +50,9 @@ import api from "../../services/api";
                                             <h2> Endereço </h2>
                                                 <span> Selecione o endereço no Mapa </span>
                                         </legend>
-                                            <MapContainer center={[-28.9669647, -51.0436304]} zoom={15}>
+                                            <MapContainer center={ [ -28.9669647, -51.0436304 ] } zoom={ 15 }>
                                                 <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
-                                                    <Marker position={[-28.9669647, -51.0436304]}/>
+                                                    <Marker position={ [ -28.9669647, -51.0436304 ] }/>
                                             </MapContainer>
                                                 <div className="field_group">
                                                     <div className="field">
@@ -72,30 +75,12 @@ import api from "../../services/api";
                                                 <span> Selecione um ou mais Itens abaixo </span>
                                         </legend>
                                             <ul className="items_grid">
-                                                <li className="selected">
-                                                    <img src="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg" alt="teste"/>
-                                                        <span> Lâmpadas e Iluminação </span>
-                                                </li>
-                                                <li className="selected">
-                                                    <img src="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg" alt="teste"/>
-                                                        <span> Lâmpadas e Iluminação </span>
-                                                </li>
-                                                <li className="selected">
-                                                    <img src="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg" alt="teste"/>
-                                                        <span> Lâmpadas e Iluminação </span>
-                                                </li>
-                                                <li className="selected">
-                                                    <img src="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg" alt="teste"/>
-                                                        <span> Lâmpadas e Iluminação </span>
-                                                </li>
-                                                <li className="selected">
-                                                    <img src="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg" alt="teste"/>
-                                                        <span> Lâmpadas e Iluminação </span>
-                                                </li>
-                                                <li className="selected">
-                                                    <img src="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg" alt="teste"/>
-                                                        <span> Lâmpadas e Iluminação </span>
-                                                </li>
+                                                { items.map(item => (
+                                                    <li key={ item.id }>
+                                                        <img src={ item.image_url } alt={ item.title }/>
+                                                            <span> { item.title } </span>
+                                                    </li>
+                                                )) }
                                             </ul>
                                     </fieldset>
                                         <button type="submit">
