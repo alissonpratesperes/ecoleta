@@ -116,6 +116,13 @@ div#create_point form fieldset div.field_group div.field + div.field {
     margin-left: 30px;
 }
 
+div#create_point form fieldset div.leaflet-container {
+    margin-bottom: 24px;
+    height: 400px;
+    width: 100%;
+    border-radius: 10px;
+}
+
 div#create_point form fieldset div.field_group {
     flex: 1;
     display: flex;
@@ -262,4 +269,4 @@ div#create_point form button strong {
 
 div#create_point form button:hover {
     background-color: #31B971;
-}
+}  

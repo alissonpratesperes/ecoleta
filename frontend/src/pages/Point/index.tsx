@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FiLogOut, FiSave } from "react-icons/fi";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
 
 import logo from "../../assets/logo.svg";
 import "./styles.css";
@@ -39,20 +40,24 @@ import "./styles.css";
                                     <h2> Endereço </h2>
                                         <span> Selecione o endereço no Mapa </span>
                                 </legend>
-                                    <div className="field_group">
-                                        <div className="field">
-                                            <label htmlFor="uf"> Estado (UF) </label>
-                                                <select name="uf" id="uf">
-                                                    <option value="0"> Selecione uma UF </option>
-                                                </select>
+                                    <MapContainer center={[-28.9669647, -51.0436304]} zoom={15}>
+                                        <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+                                            <Marker position={[-28.9669647, -51.0436304]}/>
+                                    </MapContainer>
+                                        <div className="field_group">
+                                            <div className="field">
+                                                <label htmlFor="uf"> Estado (UF) </label>
+                                                    <select name="uf" id="uf">
+                                                        <option value="0"> Selecione uma UF </option>
+                                                    </select>
+                                            </div>
+                                            <div className="field">
+                                                <label htmlFor="city"> Cidade </label>
+                                                    <select name="city" id="city">
+                                                        <option value="0"> Selecione uma Cidade </option>
+                                                    </select>
+                                            </div>
                                         </div>
-                                        <div className="field">
-                                            <label htmlFor="city"> Cidade </label>
-                                                <select name="city" id="city">
-                                                    <option value="0"> Selecione uma Cidade </option>
-                                                </select>
-                                        </div>
-                                    </div>
                             </fieldset>
                             <fieldset>
                                 <legend>
