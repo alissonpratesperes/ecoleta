@@ -102,6 +102,9 @@ import api from "../../services/api";
                                                             <label htmlFor="city"> Cidade </label>
                                                                 <select name="city" id="city">
                                                                     <option value="0"> Selecione uma Cidade </option>
+                                                                        { cities.map(city => (
+                                                                            <option key={ city.nome } value={ city.nome }> { city.nome } </option>
+                                                                        )) }
                                                                 </select>
                                                         </div>
                                                     </div>
