@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import { FiLogOut, FiSave } from "react-icons/fi";
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import axios from "axios";
 
 import Item from "../../interfaces/Item";
@@ -15,7 +15,9 @@ import api from "../../services/api";
         const [ items, setItems ] = useState<Item[]>([]);
         const [ federativeUnits, setFederativeUnits ] = useState<FederativeUnit[]>([]);
         const [ cities, setCities ] = useState<City[]>([]);
-        const [ selectedFederativeUnit, setSelectedFederativeUnit ] = useState("0");
+        const [ selectedFederativeUnit, setSelectedFederativeUnit ] = useState("");
+        const [ selectedCity, setSelectedCity ] = useState("");
+        const [ selectedPosition, setSelectedPosition ] = useState<[number, number]>([0, 0]);
 
             useEffect(() => {
                 api.get("/items").then(response => {
@@ -51,6 +53,23 @@ import api from "../../services/api";
                         setSelectedFederativeUnit(federativeUnit);
                 }
 
+                function handleSelectedCity(event: ChangeEvent<HTMLSelectElement>) {
+                    const city = event.target.value;
+                        setSelectedCity(city);
+                }
+
+                function HandleClickedCoordinates() {
+                    useMapEvents({
+                        click: (event) => {
+                            setSelectedPosition([
+                                event.latlng.lat,
+                                event.latlng.lng
+                            ]);
+                        }
+                    });
+                        return null;
+                }
+
                     return (
                         <div id="create_point">
                             <header>
@@ -82,11 +101,12 @@ import api from "../../services/api";
                                         <fieldset>
                                             <legend>
                                                 <h2> Endereço </h2>
-                                                    <span> Selecione o endereço no Mapa </span>
+                                                    <span> Selecione o endereço no mapa </span>
                                             </legend>
                                                 <MapContainer center={ [ -28.9669647, -51.0436304 ] } zoom={ 15 }>
                                                     <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
-                                                        <Marker position={ [ -28.9669647, -51.0436304 ] }/>
+                                                        <Marker position={ selectedPosition }/>
+                                                            <HandleClickedCoordinates/>
                                                 </MapContainer>
                                                     <div className="field_group">
                                                         <div className="field">
@@ -100,7 +120,7 @@ import api from "../../services/api";
                                                         </div>
                                                         <div className="field">
                                                             <label htmlFor="city"> Cidade </label>
-                                                                <select name="city" id="city">
+                                                                <select name="city" id="city" value={ selectedCity } onChange={ handleSelectedCity }>
                                                                     <option value="0"> Selecione uma Cidade </option>
                                                                         { cities.map(city => (
                                                                             <option key={ city.nome } value={ city.nome }> { city.nome } </option>
@@ -112,7 +132,7 @@ import api from "../../services/api";
                                         <fieldset>
                                             <legend>
                                                 <h2> Itens de Coleta </h2>
-                                                    <span> Selecione um ou mais Itens abaixo </span>
+                                                    <span> Selecione um ou mais itens abaixo </span>
                                             </legend>
                                                 <ul className="items_grid">
                                                     { items.map(item => (
