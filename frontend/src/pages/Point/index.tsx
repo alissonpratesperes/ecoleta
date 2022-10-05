@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { FiLogOut, FiSave } from "react-icons/fi";
 import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from "react-leaflet";
@@ -19,10 +19,15 @@ import api from "../../services/api";
         const [ selectedCity, setSelectedCity ] = useState("");
         const [ initialPosition, setInitialPosition ] = useState<[number, number]>([0, 0]);
         const [ selectedPosition, setSelectedPosition ] = useState<[number, number]>([0, 0]);
+        const [ inputData, setInputData ] = useState({ name: "", email: "", whatsapp: "" });
+        const [ selectedItems, setSelectedItems ] = useState<number[]>([]);
 
             useEffect(() => {
                 navigator.geolocation.getCurrentPosition(position => {
-                    const { latitude, longitude } = position.coords;
+                    const {
+                        latitude,
+                        longitude
+                    } = position.coords;
 
                         setInitialPosition([
                             latitude,
@@ -31,41 +36,59 @@ import api from "../../services/api";
                 });
             }, []);
             useEffect(() => {
-                api.get("/items").then(response => {
-                    setItems(response.data.serializedItems);
+                api.get(
+                    "/items"
+                ).then(response => {
+                    setItems(
+                        response.data.serializedItems
+                    );
                 });
             }, []);
             useEffect(() => {
-                axios.get<FederativeUnit[]>("https://servicodados.ibge.gov.br/api/v1/localidades/estados").then(response => {
+                axios.get<FederativeUnit[]>(
+                    "https://servicodados.ibge.gov.br/api/v1/localidades/estados"
+                ).then(response => {
                     const federativeUnitInitials = response.data.map(uf => {
                         return {
                             sigla: uf.sigla,
                             nome: uf.nome
                         };
                     });
-                        setFederativeUnits(federativeUnitInitials);
+
+                        setFederativeUnits(
+                            federativeUnitInitials
+                        );
                 });
             }, []);
             useEffect(() => {
                 if(selectedFederativeUnit === "0")
                     return;
-                        axios.get<City[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedFederativeUnit}/municipios`).then(response => {
+                        axios.get<City[]>(
+                            `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedFederativeUnit}/municipios`
+                        ).then(response => {
                             const cityNames = response.data.map(city => {
                                 return {
                                     nome: city.nome
                                 };
                             });
-                                setCities(cityNames);
+
+                                setCities(
+                                    cityNames
+                                );
                         });                        
             }, [ selectedFederativeUnit ]);
 
                 function handleSelectedFederativeUnit(event: ChangeEvent<HTMLSelectElement>) {
                     const federativeUnit = event.target.value;
-                        setSelectedFederativeUnit(federativeUnit);
+                        setSelectedFederativeUnit(
+                            federativeUnit
+                        );
                 };
                 function handleSelectedCity(event: ChangeEvent<HTMLSelectElement>) {
                     const city = event.target.value;
-                        setSelectedCity(city);
+                        setSelectedCity(
+                            city
+                        );
                 };
                 function HandleClickedCoordinates() {
                     useMapEvents({
@@ -74,19 +97,75 @@ import api from "../../services/api";
                                 event.latlng.lat,
                                 event.latlng.lng
                             ]);
-
-                            console.log(event.latlng.lat,
-                                event.latlng.lng)
                         }
                     });
                         return null;
                 };
                 function HandleCoordinatesState(props: any) {
                     const map = useMap();
-
-                        map.panTo(props.centerMap);
+                        map.panTo(
+                            props.centerMap
+                        );
 
                             return null;
+                };
+                function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+                    const {
+                        name,
+                        value
+                    } = event.target;
+
+                        setInputData({
+                            ...inputData,
+                                [ name ]: value
+                        });
+                };
+                function handleSelectItem(id: number) {
+                    const alreadySelectedItem = selectedItems.findIndex(
+                        item => item === id
+                    );
+
+                        if(alreadySelectedItem >= 0) {
+                            const filteredItems = selectedItems.filter(
+                                item => item !== id
+                            );
+
+                                setSelectedItems(
+                                    filteredItems
+                                );
+                        } else {
+                            setSelectedItems([
+                                ...selectedItems,
+                                    id
+                            ]);
+                        }
+                    
+                };
+                async function handleSubmit(event: FormEvent) {
+                    event.preventDefault();
+
+                        const { name, email, whatsapp } = inputData;
+                        const [ latitude, longitude ] = selectedPosition;
+                        const city = selectedCity;
+                        const uf = selectedFederativeUnit;
+                        const items = selectedItems;
+                        const data = {
+                            name,
+                            email,
+                            whatsapp,
+                            latitude,
+                            longitude,
+                            city,
+                            uf,
+                            items
+                        };
+
+                            await api.post(
+                                "/points",
+                                    data
+                            );
+
+                                alert("Ponto de coleta criado!");
                 };
 
                     return (
@@ -98,22 +177,37 @@ import api from "../../services/api";
                                             <strong> Voltar para a Home </strong>
                                     </Link>
                             </header>
-                                <form>
+                                <form onSubmit={ handleSubmit }>
                                     <h1> Cadastro do <br/> ponto de coleta. </h1>
                                         <fieldset>
                                             <legend> <h2> Dados </h2> </legend>
                                                 <div className="field">
                                                     <label htmlFor="name"> Nome da Entidade </label>
-                                                        <input type="text" name="name" id="name"/>
+                                                        <input
+                                                            type="text"
+                                                            name="name"
+                                                            id="name"
+                                                                onChange={ handleInputChange }
+                                                        />
                                                 </div>
                                                 <div className="field_group">
                                                     <div className="field">
                                                         <label htmlFor="email"> E-mail </label>
-                                                            <input type="email" name="email" id="email"/>
+                                                            <input
+                                                                type="email"
+                                                                name="email"
+                                                                id="email"
+                                                                    onChange={ handleInputChange }
+                                                            />
                                                     </div>
                                                     <div className="field">
                                                         <label htmlFor="whatsapp"> WhatsApp </label>
-                                                            <input type="text" name="whatsapp" id="whatsapp"/>
+                                                            <input
+                                                                type="text"
+                                                                name="whatsapp"
+                                                                id="whatsapp"
+                                                                    onChange={ handleInputChange }
+                                                            />
                                                     </div>
                                                 </div>
                                         </fieldset>
@@ -123,7 +217,7 @@ import api from "../../services/api";
                                                     <span> Selecione o endereço no mapa </span>
                                             </legend>
                                                 <MapContainer center={ initialPosition } zoom={ 15 }>
-                                                    <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+                                                    <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
                                                         <Marker position={ selectedPosition }/>
                                                             <HandleClickedCoordinates/>
                                                                 <HandleCoordinatesState centerMap={ initialPosition }/>
@@ -131,19 +225,39 @@ import api from "../../services/api";
                                                     <div className="field_group">
                                                         <div className="field">
                                                             <label htmlFor="uf"> Unidade Federativa </label>
-                                                                <select name="uf" id="uf" value={ selectedFederativeUnit } onChange={ handleSelectedFederativeUnit }>
+                                                                <select
+                                                                    name="uf"
+                                                                    id="uf"
+                                                                        value={ selectedFederativeUnit }
+                                                                        onChange={ handleSelectedFederativeUnit }
+                                                                >
                                                                     <option value="0"> Selecione um Estado </option>
                                                                         { federativeUnits.map(federativeUnit => (
-                                                                            <option key={ federativeUnit.sigla } value={ federativeUnit.sigla }> { federativeUnit.sigla } - { federativeUnit.nome } </option>
+                                                                            <option
+                                                                                key={ federativeUnit.sigla }
+                                                                                    value={ federativeUnit.sigla }
+                                                                            >
+                                                                                { federativeUnit.sigla } - { federativeUnit.nome }
+                                                                            </option>
                                                                         )) }
                                                                 </select>
                                                         </div>
                                                         <div className="field">
                                                             <label htmlFor="city"> Cidade </label>
-                                                                <select name="city" id="city" value={ selectedCity } onChange={ handleSelectedCity }>
+                                                                <select
+                                                                    name="city"
+                                                                    id="city"
+                                                                        value={ selectedCity }
+                                                                        onChange={ handleSelectedCity }
+                                                                >
                                                                     <option value="0"> Selecione uma Cidade </option>
                                                                         { cities.map(city => (
-                                                                            <option key={ city.nome } value={ city.nome }> { city.nome } </option>
+                                                                            <option
+                                                                                key={ city.nome }
+                                                                                    value={ city.nome }
+                                                                            >
+                                                                                { city.nome }
+                                                                            </option>
                                                                         )) }
                                                                 </select>
                                                         </div>
@@ -156,7 +270,11 @@ import api from "../../services/api";
                                             </legend>
                                                 <ul className="items_grid">
                                                     { items.map(item => (
-                                                        <li key={ item.id }>
+                                                        <li
+                                                            key={ item.id }
+                                                                onClick={ () => handleSelectItem(item.id) }
+                                                                className={ selectedItems.includes(item.id) ? "selected" : "" }
+                                                        >
                                                             <img src={ item.image_url } alt={ item.title }/>
                                                                 <span> { item.title } </span>
                                                         </li>
