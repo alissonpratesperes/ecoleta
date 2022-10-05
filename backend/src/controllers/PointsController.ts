@@ -12,7 +12,8 @@ import knex from "../database/connection";
 
             const parsedItems = String(items)
                 .split(",")
-                .map((item: any) => Number(item.trim()));
+                .map((item: any) =>
+                    Number(item.trim()));
 
             const points = await knex("points")
                 .join("point_items", "points.id", "=", "point_items.point_id")

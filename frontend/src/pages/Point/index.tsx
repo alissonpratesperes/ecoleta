@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import { FiLogOut, FiSave } from "react-icons/fi";
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from "react-leaflet";
 import axios from "axios";
 
 import Item from "../../interfaces/Item";
@@ -17,8 +17,19 @@ import api from "../../services/api";
         const [ cities, setCities ] = useState<City[]>([]);
         const [ selectedFederativeUnit, setSelectedFederativeUnit ] = useState("");
         const [ selectedCity, setSelectedCity ] = useState("");
+        const [ initialPosition, setInitialPosition ] = useState<[number, number]>([0, 0]);
         const [ selectedPosition, setSelectedPosition ] = useState<[number, number]>([0, 0]);
 
+            useEffect(() => {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const { latitude, longitude } = position.coords;
+
+                        setInitialPosition([
+                            latitude,
+                            longitude
+                        ]);
+                });
+            }, []);
             useEffect(() => {
                 api.get("/items").then(response => {
                     setItems(response.data.serializedItems);
@@ -51,13 +62,11 @@ import api from "../../services/api";
                 function handleSelectedFederativeUnit(event: ChangeEvent<HTMLSelectElement>) {
                     const federativeUnit = event.target.value;
                         setSelectedFederativeUnit(federativeUnit);
-                }
-
+                };
                 function handleSelectedCity(event: ChangeEvent<HTMLSelectElement>) {
                     const city = event.target.value;
                         setSelectedCity(city);
-                }
-
+                };
                 function HandleClickedCoordinates() {
                     useMapEvents({
                         click: (event) => {
@@ -65,10 +74,20 @@ import api from "../../services/api";
                                 event.latlng.lat,
                                 event.latlng.lng
                             ]);
+
+                            console.log(event.latlng.lat,
+                                event.latlng.lng)
                         }
                     });
                         return null;
-                }
+                };
+                function HandleCoordinatesState(props: any) {
+                    const map = useMap();
+
+                        map.panTo(props.centerMap);
+
+                            return null;
+                };
 
                     return (
                         <div id="create_point">
@@ -103,10 +122,11 @@ import api from "../../services/api";
                                                 <h2> Endereço </h2>
                                                     <span> Selecione o endereço no mapa </span>
                                             </legend>
-                                                <MapContainer center={ [ -28.9669647, -51.0436304 ] } zoom={ 15 }>
+                                                <MapContainer center={ initialPosition } zoom={ 15 }>
                                                     <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
                                                         <Marker position={ selectedPosition }/>
                                                             <HandleClickedCoordinates/>
+                                                                <HandleCoordinatesState centerMap={ initialPosition }/>
                                                 </MapContainer>
                                                     <div className="field_group">
                                                         <div className="field">
