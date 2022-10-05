@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiLogOut, FiSave } from "react-icons/fi";
 import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from "react-leaflet";
 import axios from "axios";
@@ -21,6 +21,7 @@ import api from "../../services/api";
         const [ selectedPosition, setSelectedPosition ] = useState<[number, number]>([0, 0]);
         const [ inputData, setInputData ] = useState({ name: "", email: "", whatsapp: "" });
         const [ selectedItems, setSelectedItems ] = useState<number[]>([]);
+        const navigate = useNavigate();
 
             useEffect(() => {
                 navigator.geolocation.getCurrentPosition(position => {
@@ -166,6 +167,8 @@ import api from "../../services/api";
                             );
 
                                 alert("Ponto de coleta criado!");
+
+                                    navigate("/");
                 };
 
                     return (
