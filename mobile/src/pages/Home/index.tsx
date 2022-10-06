@@ -2,66 +2,74 @@ import React from "react";
 import { View, Image, StyleSheet, Text, ImageBackground } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { Feather as Icon } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native"
 
     const Home = () => {
-        return (
-            <ImageBackground
-                style={ styles.container }
-                    source={ require("../../assets/home-background.png") }
-                        imageStyle={{
-                            height: 368,
-                            width: 274
-                        }}
-            >
-                <View
-                    style={ styles.main }
-                >
-                    <Image
-                        source={ require("../../assets/logo.png") }
-                    />
-                        <Text
-                            style={ styles.slogan }
+        const navigation = useNavigation();
+
+            function handleNavigateToPoints() {
+                navigation.navigate(
+                    "Points" as never
+                );
+            };
+
+                return (
+                    <ImageBackground
+                        style={ styles.container }
+                            source={ require("../../assets/home-background.png") }
+                                imageStyle={{
+                                    height: 368,
+                                    width: 274
+                                }}
+                    >
+                        <View
+                            style={ styles.main }
                         >
-                            Seu marketplace de coleta de resíduos.
-                        </Text>
-                        <Text
-                            style={ styles.description }    
-                        >
-                            Ajudamos pessoas a encontrarem pontos de coleta de forma eficiente.
-                        </Text>
-                </View>
-                    <View>
-                        <RectButton
-                            style={ styles.button }
-                                onPress={ () => { } }
-                        >
-                            <View
-                                style={ styles.buttonIcon }
-                            >
-                                <Text>
-                                    <Icon
-                                        name="log-in"
-                                        size={ 25 }
-                                        color="#FFFFFF"
-                                    />
-                                </Text> 
-                            </View>
+                            <Image
+                                source={ require("../../assets/logo.png") }
+                            />
                                 <Text
-                                    style={ styles.buttonText }
+                                    style={ styles.slogan }
                                 >
-                                    Entrar
+                                    Seu marketplace de coleta de resíduos.
                                 </Text>
-                        </RectButton>
-                    </View>
-            </ImageBackground>
-        );
+                                <Text
+                                    style={ styles.description }    
+                                >
+                                    Ajudamos pessoas a encontrarem pontos de coleta de forma eficiente.
+                                </Text>
+                        </View>
+                            <View>
+                                <RectButton
+                                    style={ styles.button }
+                                        onPress={ handleNavigateToPoints }
+                                >
+                                    <View
+                                        style={ styles.buttonIcon }
+                                    >
+                                        <Text>
+                                            <Icon
+                                                name="log-in"
+                                                size={ 25 }
+                                                color="#FFFFFF"
+                                            />
+                                        </Text> 
+                                    </View>
+                                        <Text
+                                            style={ styles.buttonText }
+                                        >
+                                            Entrar
+                                        </Text>
+                                </RectButton>
+                            </View>
+                    </ImageBackground>
+                );
     };
 
     const styles = StyleSheet.create({
         container: {
             padding: 30,
-            flex: 1,
-            backgroundColor: "#F0F0F5"
+            flex: 1
         },
         main: {
             flex: 1,
@@ -96,7 +104,7 @@ import { Feather as Icon } from "@expo/vector-icons";
             width: 70,
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "31B971"
+            backgroundColor: "#31B971"
         },
         buttonText: {
             flex: 1,
