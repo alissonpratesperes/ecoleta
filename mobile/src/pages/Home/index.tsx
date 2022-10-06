@@ -2,7 +2,7 @@ import React from "react";
 import { View, Image, StyleSheet, Text, ImageBackground } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { Feather as Icon } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native";
 
     const Home = () => {
         const navigation = useNavigation();
