@@ -1,6 +1,6 @@
 import React from "react";
 import Constants from "expo-constants";
-import { View, StyleSheet, TouchableOpacity, Text, ScrollView } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text, ScrollView, Image } from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import MapView, { Marker } from "react-native-maps";
@@ -11,6 +11,11 @@ import { SvgUri } from "react-native-svg";
 
             function handleNavigateBack() {
                 navigation.goBack();
+            };
+            function handleNavigateToDetail() {
+                navigation.navigate(
+                    "Detail" as never
+                );
             };
 
                 return (
@@ -50,11 +55,27 @@ import { SvgUri } from "react-native-svg";
                                                 } }
                                         >
                                             <Marker
-                                                coordinate={ {
-                                                    latitude: -28.968611980477235,
-                                                    longitude: -51.065032482147224
-                                                } }
-                                            />
+                                                style={ styles.mapMarker }
+                                                    coordinate={ {
+                                                        latitude: -28.968611980477235,
+                                                        longitude: -51.065032482147224
+                                                    } }
+                                                        onPress={ handleNavigateToDetail }
+                                            >
+                                                <View
+                                                    style={ styles.mapMarkerContainer }
+                                                >
+                                                    <Image
+                                                        style={ styles.mapMarkerImage }
+                                                            source={ { uri: "https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" } }
+                                                    />
+                                                        <Text
+                                                            style={ styles.mapMarkerTitle }
+                                                        >
+                                                            Mercado
+                                                        </Text>
+                                                </View>
+                                            </Marker>
                                         </MapView>
                                     </View>
                         </View>
@@ -73,8 +94,8 @@ import { SvgUri } from "react-native-svg";
                                         onPress={ () => {} }
                                 >
                                     <SvgUri
-                                        height={ 42 }
-                                            width={ 42 }
+                                        height={ 50 }
+                                            width={ 50 }
                                                 uri="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg"
                                     />
                                         <Text
@@ -88,8 +109,8 @@ import { SvgUri } from "react-native-svg";
                                         onPress={ () => {} }
                                 >
                                     <SvgUri
-                                        height={ 42 }
-                                            width={ 42 }
+                                        height={ 50 }
+                                            width={ 50 }
                                                 uri="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg"
                                     />
                                         <Text
@@ -103,8 +124,8 @@ import { SvgUri } from "react-native-svg";
                                         onPress={ () => {} }
                                 >
                                     <SvgUri
-                                        height={ 42 }
-                                            width={ 42 }
+                                        height={ 50 }
+                                            width={ 50 }
                                                 uri="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg"
                                     />
                                         <Text
@@ -118,8 +139,8 @@ import { SvgUri } from "react-native-svg";
                                         onPress={ () => {} }
                                 >
                                     <SvgUri
-                                        height={ 42 }
-                                            width={ 42 }
+                                        height={ 50 }
+                                            width={ 50 }
                                                 uri="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg"
                                     />
                                         <Text
@@ -133,8 +154,8 @@ import { SvgUri } from "react-native-svg";
                                         onPress={ () => {} }
                                 >
                                     <SvgUri
-                                        height={ 42 }
-                                            width={ 42 }
+                                        height={ 50 }
+                                            width={ 50 }
                                                 uri="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg"
                                     />
                                         <Text
@@ -148,8 +169,8 @@ import { SvgUri } from "react-native-svg";
                                         onPress={ () => {} }
                                 >
                                     <SvgUri
-                                        height={ 42 }
-                                            width={ 42 }
+                                        height={ 50 }
+                                            width={ 50 }
                                                 uri="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg"
                                     />
                                         <Text
@@ -198,41 +219,54 @@ import { SvgUri } from "react-native-svg";
             width: 90
         },
         mapMarkerContainer: {
-
-        },
-
-
-
-
-
-
-        itemsContainer: {
-            flexDirection: 'row',
-            marginTop: 0,
-            marginBottom: 32,
-          },
-
-          item: {
-            backgroundColor: '#fff',
-            borderWidth: 2,
-            borderColor: '#eee',
-            height: 120,
-            width: 120,
+            height: 70,
+            width: 90,
+            alignItems: "center",
+            flexDirection: "column",
+            backgroundColor: "#34CB79",
             borderRadius: 8,
-            paddingHorizontal: 16,
-            paddingTop: 20,
-            paddingBottom: 16,
-            marginRight: 8,
-            alignItems: 'center',
-            justifyContent: 'space-between',
-        
-            textAlign: 'center',
-          },
-          itemTitle: {
-            fontFamily: 'Roboto_400Regular',
-            textAlign: 'center',
-            fontSize: 13,
-          },
+            overflow: "hidden"
+        },
+        mapMarkerImage: {
+            height: 45,
+            width: 90,
+            resizeMode: "cover",
+        },
+        mapMarkerTitle: {
+            flex: 1,
+            fontFamily: "Roboto_400Regular",
+            fontSize: 14,
+            color: "#FFF",
+            lineHeight: 23
+        },
+        itemsContainer: {
+            marginTop: 0,
+            marginBottom: 30,
+            flexDirection: "row"
+        },
+        item: {
+            marginRight: 15,
+            padding: 30,
+            height: 150,
+            width: 150,
+            alignItems: "center",
+            justifyContent: "space-between",
+            textAlign: "center",
+            backgroundColor: "#FFFFFF",
+            borderWidth: 2,
+            borderColor: "#FFFFFF",
+            borderRadius: 10 
+        },
+        itemTitle: {
+            fontFamily: "Roboto_400Regular",
+            fontSize: 14,
+            textAlign: "center",
+        },
+        selectedItem: {
+            backgroundColor: "#E1FAEC",
+            borderWidth: 2,
+            borderColor: "#34CB79"
+        }
     });
 
         export default Points;
