@@ -7,6 +7,7 @@ import Points from "./pages/Points";
 import Detail from "./pages/Detail";
 
     const AppStack = createStackNavigator();
+
     const Routes = () => {
         return (
             <NavigationContainer>

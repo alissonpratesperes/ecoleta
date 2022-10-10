@@ -71,10 +71,12 @@ import { useNavigation } from "@react-navigation/native";
             padding: 30,
             flex: 1
         },
+
         main: {
             flex: 1,
             justifyContent: "center"
         },
+
         slogan: {
             marginTop: 60,
             maxWidth: 260,
@@ -82,6 +84,7 @@ import { useNavigation } from "@react-navigation/native";
             fontSize: 27,
             color: "#322153"
         },
+
         description: {
             marginTop: 24,
             maxWidth: 260,
@@ -90,6 +93,7 @@ import { useNavigation } from "@react-navigation/native";
             color: "#6C6C80",
             lineHeight: 24
         },
+
         button: {
             marginTop: 30,
             height: 70,
@@ -99,6 +103,7 @@ import { useNavigation } from "@react-navigation/native";
             borderRadius: 10,
             overflow: "hidden"
         },
+
         buttonIcon: {
             height: 70,
             width: 70,
@@ -106,6 +111,7 @@ import { useNavigation } from "@react-navigation/native";
             justifyContent: "center",
             backgroundColor: "#31B971"
         },
+        
         buttonText: {
             flex: 1,
             textAlign: "center",

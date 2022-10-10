@@ -47,19 +47,19 @@ import { SvgUri } from "react-native-svg";
                                     >
                                         <MapView
                                             style={ styles.map }
-                                                initialRegion={ {
+                                                initialRegion={{
                                                     latitude: -28.968611980477235,
                                                     longitude: -51.065032482147224,
                                                     latitudeDelta: 0.014,
                                                     longitudeDelta: 0.014
-                                                } }
+                                                }}
                                         >
                                             <Marker
                                                 style={ styles.mapMarker }
-                                                    coordinate={ {
+                                                    coordinate={{
                                                         latitude: -28.968611980477235,
                                                         longitude: -51.065032482147224
-                                                    } }
+                                                    }}
                                                         onPress={ handleNavigateToDetail }
                                             >
                                                 <View
@@ -67,7 +67,9 @@ import { SvgUri } from "react-native-svg";
                                                 >
                                                     <Image
                                                         style={ styles.mapMarkerImage }
-                                                            source={ { uri: "https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" } }
+                                                            source={{
+                                                                uri: "https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
+                                                            }}
                                                     />
                                                         <Text
                                                             style={ styles.mapMarkerTitle }
@@ -85,9 +87,9 @@ import { SvgUri } from "react-native-svg";
                             <ScrollView
                                 horizontal
                                     showsHorizontalScrollIndicator={ false }
-                                        contentContainerStyle={ {
+                                        contentContainerStyle={{
                                             paddingHorizontal: 30
-                                        } }
+                                        }}
                             >
                                 <TouchableOpacity
                                     style={ styles.item }
@@ -192,17 +194,20 @@ import { SvgUri } from "react-native-svg";
             paddingHorizontal: 30,
             flex: 1
         },
+
         title: {
             marginTop: 24,
             fontFamily: "Ubuntu_700Bold",
             fontSize: 20
         },
+
         description: {
             marginTop: 12,
             fontFamily: "Roboto_400Regular",
             fontSize: 16,
             color: "#6C6C80"
         },
+
         mapContainer: {
             marginTop: 24,
             width: "100%",
@@ -210,14 +215,17 @@ import { SvgUri } from "react-native-svg";
             borderRadius: 10,
             overflow: "hidden"
         },
+
         map: {
             height: "100%",
             width: "100%"
         },
+
         mapMarker: {
             height: 80,
             width: 90
         },
+
         mapMarkerContainer: {
             height: 70,
             width: 90,
@@ -227,11 +235,13 @@ import { SvgUri } from "react-native-svg";
             borderRadius: 8,
             overflow: "hidden"
         },
+
         mapMarkerImage: {
             height: 45,
             width: 90,
             resizeMode: "cover",
         },
+
         mapMarkerTitle: {
             flex: 1,
             fontFamily: "Roboto_400Regular",
@@ -239,11 +249,13 @@ import { SvgUri } from "react-native-svg";
             color: "#FFF",
             lineHeight: 23
         },
+
         itemsContainer: {
             marginTop: 0,
             marginBottom: 30,
             flexDirection: "row"
         },
+
         item: {
             marginRight: 15,
             padding: 30,
@@ -257,11 +269,13 @@ import { SvgUri } from "react-native-svg";
             borderColor: "#FFFFFF",
             borderRadius: 10 
         },
+
         itemTitle: {
             fontFamily: "Roboto_400Regular",
             fontSize: 14,
             textAlign: "center",
         },
+
         selectedItem: {
             backgroundColor: "#E1FAEC",
             borderWidth: 2,
