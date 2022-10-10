@@ -77,16 +77,20 @@ import api from "../../services/api";
                                     cityNames
                                 );
                         });                        
-            }, [ selectedFederativeUnit ]);
+            }, [
+                selectedFederativeUnit
+            ]);
 
                 function handleSelectedFederativeUnit(event: ChangeEvent<HTMLSelectElement>) {
                     const federativeUnit = event.target.value;
+
                         setSelectedFederativeUnit(
                             federativeUnit
                         );
                 };
                 function handleSelectedCity(event: ChangeEvent<HTMLSelectElement>) {
                     const city = event.target.value;
+
                         setSelectedCity(
                             city
                         );
@@ -100,10 +104,12 @@ import api from "../../services/api";
                             ]);
                         }
                     });
+
                         return null;
                 };
                 function HandleCoordinatesState(props: any) {
                     const map = useMap();
+
                         map.panTo(
                             props.centerMap
                         );
@@ -139,7 +145,7 @@ import api from "../../services/api";
                                 ...selectedItems,
                                     id
                             ]);
-                        }
+                        };
                     
                 };
                 async function handleSubmit(event: FormEvent) {
@@ -166,26 +172,49 @@ import api from "../../services/api";
                                     data
                             );
 
-                                alert("Ponto de coleta criado!");
+                                alert("Ponto de Coleta criado, com sucesso! ✅");
 
                                     navigate("/");
                 };
 
                     return (
-                        <div id="create_point">
+                        <div
+                            id="create_point"
+                        >
                             <header>
-                                <img src={ logo } alt="Ecoleta"/>
-                                    <Link to="/">
+                                <img
+                                    alt="Ecoleta"
+                                        src={ logo }
+                                />
+                                    <Link
+                                        to="/"
+                                    >
                                         <FiLogOut/>
-                                            <strong> Voltar para a Home </strong>
+                                            <strong>
+                                                Voltar para a Home
+                                            </strong>
                                     </Link>
                             </header>
-                                <form onSubmit={ handleSubmit }>
-                                    <h1> Cadastro do <br/> ponto de coleta. </h1>
+                                <form
+                                    onSubmit={ handleSubmit }
+                                >
+                                    <h1>
+                                        Cadastro do <br/> ponto de coleta.
+                                    </h1>
                                         <fieldset>
-                                            <legend> <h2> Dados </h2> </legend>
-                                                <div className="field">
-                                                    <label htmlFor="name"> Nome da Entidade </label>
+                                            <legend>
+                                                <h2>
+                                                    Dados
+                                                </h2>
+                                            </legend>
+                                                <div
+                                                    className="field"
+                                                >
+                                                    <label
+                                                        htmlFor="name"
+                                                    >
+                                                        Nome da Entidade
+                                                    </label>
                                                         <input
                                                             type="text"
                                                             name="name"
@@ -193,9 +222,17 @@ import api from "../../services/api";
                                                                 onChange={ handleInputChange }
                                                         />
                                                 </div>
-                                                <div className="field_group">
-                                                    <div className="field">
-                                                        <label htmlFor="email"> E-mail </label>
+                                                <div
+                                                    className="field_group"
+                                                >
+                                                    <div
+                                                        className="field"
+                                                    >
+                                                        <label
+                                                            htmlFor="email"
+                                                        >
+                                                            E-mail
+                                                        </label>
                                                             <input
                                                                 type="email"
                                                                 name="email"
@@ -203,8 +240,14 @@ import api from "../../services/api";
                                                                     onChange={ handleInputChange }
                                                             />
                                                     </div>
-                                                    <div className="field">
-                                                        <label htmlFor="whatsapp"> WhatsApp </label>
+                                                    <div
+                                                        className="field"
+                                                    >
+                                                        <label
+                                                            htmlFor="whatsapp"
+                                                        >
+                                                            WhatsApp
+                                                        </label>
                                                             <input
                                                                 type="text"
                                                                 name="whatsapp"
@@ -216,25 +259,48 @@ import api from "../../services/api";
                                         </fieldset>
                                         <fieldset>
                                             <legend>
-                                                <h2> Endereço </h2>
-                                                    <span> Selecione o endereço no mapa </span>
+                                                <h2>
+                                                    Endereço
+                                                </h2>
+                                                    <span>
+                                                        Selecione o endereço no mapa
+                                                    </span>
                                             </legend>
-                                                <MapContainer center={ initialPosition } zoom={ 15 }>
-                                                    <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
-                                                        <Marker position={ selectedPosition }/>
+                                                <MapContainer 
+                                                    center={ initialPosition }
+                                                        zoom={ 15 }
+                                                >
+                                                    <TileLayer
+                                                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                                    />
+                                                        <Marker
+                                                            position={ selectedPosition }
+                                                        />
                                                             <HandleClickedCoordinates/>
-                                                                <HandleCoordinatesState centerMap={ initialPosition }/>
+                                                                <HandleCoordinatesState 
+                                                                    centerMap={ initialPosition }
+                                                                />
                                                 </MapContainer>
-                                                    <div className="field_group">
-                                                        <div className="field">
-                                                            <label htmlFor="uf"> Unidade Federativa </label>
+                                                    <div
+                                                        className="field_group"
+                                                    >
+                                                        <div
+                                                            className="field"
+                                                        >
+                                                            <label
+                                                                htmlFor="uf"
+                                                            >
+                                                                Unidade Federativa
+                                                            </label>
                                                                 <select
                                                                     name="uf"
                                                                     id="uf"
                                                                         value={ selectedFederativeUnit }
                                                                         onChange={ handleSelectedFederativeUnit }
                                                                 >
-                                                                    <option value="0"> Selecione um Estado </option>
+                                                                    <option value="0">
+                                                                        Selecione um Estado
+                                                                    </option>
                                                                         { federativeUnits.map(federativeUnit => (
                                                                             <option
                                                                                 key={ federativeUnit.sigla }
@@ -245,15 +311,23 @@ import api from "../../services/api";
                                                                         )) }
                                                                 </select>
                                                         </div>
-                                                        <div className="field">
-                                                            <label htmlFor="city"> Cidade </label>
+                                                        <div
+                                                            className="field"
+                                                        >
+                                                            <label
+                                                                htmlFor="city"
+                                                            >
+                                                                Cidade
+                                                            </label>
                                                                 <select
                                                                     name="city"
                                                                     id="city"
                                                                         value={ selectedCity }
                                                                         onChange={ handleSelectedCity }
                                                                 >
-                                                                    <option value="0"> Selecione uma Cidade </option>
+                                                                    <option value="0">
+                                                                        Selecione uma Cidade
+                                                                    </option>
                                                                         { cities.map(city => (
                                                                             <option
                                                                                 key={ city.nome }
@@ -268,23 +342,36 @@ import api from "../../services/api";
                                         </fieldset>
                                         <fieldset>
                                             <legend>
-                                                <h2> Itens de Coleta </h2>
-                                                    <span> Selecione um ou mais itens abaixo </span>
+                                                <h2>
+                                                    Itens de Coleta
+                                                </h2>
+                                                    <span>
+                                                        Selecione um ou mais itens abaixo
+                                                    </span>
                                             </legend>
-                                                <ul className="items_grid">
+                                                <ul
+                                                    className="items_grid"
+                                                >
                                                     { items.map(item => (
                                                         <li
                                                             key={ item.id }
                                                                 onClick={ () => handleSelectItem(item.id) }
-                                                                className={ selectedItems.includes(item.id) ? "selected" : "" }
+                                                                    className={ selectedItems.includes(item.id) ? "selected" : "" }
                                                         >
-                                                            <img src={ item.image_url } alt={ item.title }/>
-                                                                <span> { item.title } </span>
+                                                            <img
+                                                                alt={ item.title }
+                                                                    src={ item.image_url }
+                                                            />
+                                                                <span>
+                                                                    { item.title }
+                                                                </span>
                                                         </li>
                                                     )) }
                                                 </ul>
                                         </fieldset>
-                                            <button type="submit">
+                                            <button
+                                                type="submit"
+                                            >
                                                 <span>
                                                     <FiSave/>
                                                 </span>

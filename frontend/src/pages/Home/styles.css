@@ -4,7 +4,7 @@ div#home {
     background-repeat: no-repeat;
     background-size: 650px;
     background-position: bottom right;
-}
+};
 
 div#home div.content {
     margin: 0px auto 0px auto;
@@ -15,11 +15,11 @@ div#home div.content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-}
+};
 
 div#home div.content header {
     margin: 48px 0px 0px 0px;
-}
+};
 
 div#home div.content main {
     flex: 1;
@@ -27,14 +27,14 @@ div#home div.content main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
+};
 
 div#home div.content main h1 {
     font-family: Ubuntu;
     font-size: 54px;
     font-weight: 700;
     color: #322153;
-}
+};
 
 div#home div.content main p {
     margin-top: 24px;
@@ -43,7 +43,7 @@ div#home div.content main p {
     font-weight: 400;
     color: #6C6C80;
     line-height: 38px;
-}
+};
 
 div#home div.content main a {
     margin-top: 48px;
@@ -58,7 +58,7 @@ div#home div.content main a {
     background-color: #34CB79;
     overflow: hidden;
     transition: background-color 0.15s;
-}
+};
 
 div#home div.content main a span {
     height: 72px;
@@ -68,20 +68,20 @@ div#home div.content main a span {
     align-items: center;
     justify-content: center;
     background-color: #31B971;
-}
+};
 
 div#home div.content main a span svg {
     height: 25px;
     width: 25px;
     color: #FFFFFF;
-}
+};
 
 div#home div.content main a strong {
     flex: 1;
     color: #FFFFFF;
     text-align: center;
-}
+};
 
 div#home div.content main a:hover {
     background-color: #31B971;
-}
+};

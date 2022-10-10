@@ -3,7 +3,7 @@ div#create_point {
     padding: 0px 30px 0px 30px;
     width: 100%;
     max-width: 1100px;
-}
+};
 
 div#create_point header {
     margin-top: 48px;
@@ -11,11 +11,11 @@ div#create_point header {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-}
+};
 
 div#create_point header img {
     margin-left: 8px;
-}
+};
 
 div#create_point header a {
     display: flex;
@@ -23,20 +23,20 @@ div#create_point header a {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-}
+};
 
 div#create_point header a svg {
     margin-right: 15px;
     height: 25px;
     width: 25px;
     color: #34CB79;
-}
+};
 
 div#create_point header a strong {
     font-size: 16px;
     color: #6C6C80;
     font-weight: bold;
-}
+};
 
 div#create_point form {
     margin: 48px auto 48px auto;
@@ -45,20 +45,20 @@ div#create_point form {
     flex-direction: column;
     background-color: #FFF;
     border-radius: 10px;
-}
+};
 
 div#create_point form h1 {
     font-family: Ubuntu;
     font-size: 36px;
     font-weight: 700;
     color: #322153;
-}
+};
 
 div#create_point form fieldset {
     margin-top: 60px;
     min-inline-size: auto;
     border: 0;
-}
+};
 
 div#create_point form fieldset legend {
     margin-bottom: 40px;
@@ -67,34 +67,34 @@ div#create_point form fieldset legend {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-}
+};
 
 div#create_point form fieldset legend h2 {
     font-family: Ubuntu;
     font-size: 24px;
     font-weight: 700;
     color: #34CB79;
-}
+};
 
 div#create_point form fieldset legend span {
     font-size: 18px;
     color: #322153;
     font-weight: bold;
-}
+};
 
 div#create_point form fieldset > div.field {
     margin-bottom: 24px;
     flex: 1;
     display: flex;
     flex-direction: column;
-}
+};
 
 div#create_point form fieldset > div.field label {
     margin-bottom: 10px;
     font-size: 16px;
     color: #000000;
     font-weight: bold;
-}
+};
 
 div#create_point form fieldset > div.field input[type=text] {
     padding: 16px 24px 16px 24px;
@@ -106,22 +106,22 @@ div#create_point form fieldset > div.field input[type=text] {
     border: 2px solid #F0F0F5;
     outline: 0;
     transition: all 0.15s;
-}
+};
 
 div#create_point form fieldset > div.field input[type=text]:focus {
     border: 2px solid #6C6C80;
-}
+};
 
 div#create_point form fieldset div.field_group div.field + div.field {
     margin-left: 30px;
-}
+};
 
 div#create_point form fieldset div.leaflet-container {
     margin-bottom: 24px;
     height: 400px;
     width: 100%;
     border-radius: 10px;
-}
+};
 
 div#create_point form fieldset div.field_group {
     flex: 1;
@@ -129,20 +129,20 @@ div#create_point form fieldset div.field_group {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-}
+};
 
 div#create_point form fieldset div.field_group div.field label {
     margin-bottom: 10px;
     font-size: 16px;
     color: #000000;
     font-weight: bold;
-}
+};
 
 div#create_point form fieldset div.field_group div.field {
     flex: 1;
     display: flex;
     flex-direction: column;
-}
+};
 
 div#create_point form fieldset div.field_group div.field input[type=email],
 div#create_point form fieldset div.field_group div.field input[type=text] {
@@ -155,12 +155,12 @@ div#create_point form fieldset div.field_group div.field input[type=text] {
     border: 2px solid #F0F0F5;
     outline: 0;
     transition: all 0.15s;
-}
+};
 
 div#create_point form fieldset div.field_group div.field input[type=email]:focus,
 div#create_point form fieldset div.field_group div.field input[type=text]:focus {
     border: 2px solid #6C6C80;
-}
+};
 
 div#create_point form fieldset div.field_group div.field select {
     -webkit-appearance: none;
@@ -175,18 +175,18 @@ div#create_point form fieldset div.field_group div.field select {
     border: 2px solid #F0F0F5;
     outline: 0;
     transition: all 0.15s;
-}
+};
 
 div#create_point form fieldset div.field_group div.field select:focus {
     border: 2px solid #6C6C80;
-}
+};
 
 div#create_point form fieldset ul.items_grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     list-style: none;
-}
+};
 
 div#create_point form fieldset ul.items_grid li {
     padding: 30px 30px 30px 30px;
@@ -200,18 +200,18 @@ div#create_point form fieldset ul.items_grid li {
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
-}
+};
 
 div#create_point form fieldset ul.items_grid li.selected {
     background-color: #E1FAEC;
     border: 2px solid #34CB79;
-}
+};
 
 div#create_point form fieldset ul.items_grid li.selected span {
     font-size: 18px;
     color: #000000;
     font-weight: bold;
-}
+};
 
 div#create_point form fieldset ul.items_grid li span {
     margin-top: 20px;
@@ -222,7 +222,7 @@ div#create_point form fieldset ul.items_grid li span {
     justify-content: center;
     font-size: 18px;
     color: #6C6C80;
-}
+};
 
 div#create_point form button {
     margin-top: 60px;
@@ -243,7 +243,7 @@ div#create_point form button {
     overflow: hidden;
     cursor: pointer;
     transition: background-color 0.15s;
-}
+};
 
 div#create_point form button span {
     height: 72px;
@@ -253,20 +253,20 @@ div#create_point form button span {
     align-items: center;
     justify-content: center;
     background-color: #31B971;
-}
+};
 
 div#create_point form button span svg {
     height: 25px;
     width: 25px;
     color: #FFFFFF;
-}
+};
 
 div#create_point form button strong {
     flex: 1;
     color: #FFFFFF;
     text-align: center;
-}
+};
 
 div#create_point form button:hover {
     background-color: #31B971;
-}  
+}; 

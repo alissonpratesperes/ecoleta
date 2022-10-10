@@ -7,10 +7,17 @@ import "./styles.css";
 
     const Home = () => {
         return (
-            <div id="home">
-                <div className="content">
+            <div
+                id="home"
+            >
+                <div
+                    className="content"
+                >
                     <header>
-                        <img src={logo} alt="Ecoleta"/>
+                        <img
+                            alt="Ecoleta"
+                                src={logo}
+                        />
                     </header>
                         <main>
                             <h1>
@@ -19,7 +26,9 @@ import "./styles.css";
                                 <p>
                                     Ajudamos pessoas a encontrarem pontos de coleta de forma eficiente.
                                 </p>
-                                    <Link to="/point">
+                                    <Link
+                                        to="/point"
+                                    >
                                         <span>
                                             <FiLogIn/>
                                         </span>

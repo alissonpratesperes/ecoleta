@@ -7,6 +7,6 @@ import "./App.css";
     return (
       <Routing/>
     );
-  }
+  };
 
     export default App;
