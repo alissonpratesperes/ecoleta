@@ -27,4 +27,4 @@ import { Knex } from "knex";
                     image: "oleo_cozinha.svg"
             }
         ]);
-    }
+    };

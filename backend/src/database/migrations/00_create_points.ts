@@ -15,8 +15,8 @@ import { Knex } from "knex";
             table.string("city").notNullable();
             table.string("uf", 2).notNullable();
         });
-    }
+    };
 
         export async function down(knex: Knex) {
             return knex.schema.dropTable("points");
-        }
+        };

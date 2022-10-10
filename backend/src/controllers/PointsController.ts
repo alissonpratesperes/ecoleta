@@ -26,7 +26,7 @@ import knex from "../database/connection";
                 return response.status(200).json({
                     points
                 });
-        }
+        };
 
         async show(request: Request, response: Response) {
             const {
@@ -42,7 +42,7 @@ import knex from "../database/connection";
                         message:
                             `Point ID ${id} not found on Database.`
                     });
-                }
+                };
 
             const items = await knex("items")
                 .join("point_items", "items.id", "=", "point_items.item_id")
@@ -53,7 +53,7 @@ import knex from "../database/connection";
                     point,
                     items
                 });
-        }
+        };
 
         async create(request: Request, response: Response) {
             const {
@@ -76,7 +76,7 @@ import knex from "../database/connection";
                 longitude,
                 city,
                 uf
-            }
+            };
 
             const insertedPointId = await knex("points")
                 .insert(point);
@@ -97,7 +97,7 @@ import knex from "../database/connection";
                         id: point_id,
                         ...point
                     });
-        }
-    }
+        };
+    };
 
         export default PointsController;

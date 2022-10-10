@@ -7,8 +7,8 @@ import { Knex } from "knex";
             table.string("title").notNullable();
             table.string("image").notNullable();
         });
-    }
+    };
 
         export async function down(knex: Knex) {
             return knex.schema.dropTable("items");
-        }
+        };
