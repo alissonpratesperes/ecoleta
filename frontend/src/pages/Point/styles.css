@@ -18,6 +18,7 @@ div#create_point header img {
 }
 
 div#create_point header a {
+    margin-right: 8px;
     display: flex;
     flex-direction: row;
     align-items: center;

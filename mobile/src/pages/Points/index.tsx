@@ -24,165 +24,179 @@ import { SvgUri } from "react-native-svg";
                             style={ styles.container }
                         >
                             <TouchableOpacity
-                                onPress={ handleNavigateBack }
+                                style={ styles.navigation }
+                                    onPress={ handleNavigateBack }
                             >
                                 <Icon
                                     name="log-out"
                                     size={ 25 }
                                     color="#34CB79"
                                 />
-                            </TouchableOpacity>
-                                <Text
-                                    style={ styles.title }
-                                >
-                                    😃 Bem-vindo.
-                                </Text>
-                                <Text
-                                    style={ styles.description }
-                                >
-                                    Encontre no mapa um ponto de coleta.
-                                </Text>
-                                    <View
-                                        style={ styles.mapContainer }
+                                    <Text
+                                        style={ styles.navigationText }
                                     >
-                                        <MapView
-                                            style={ styles.map }
-                                                initialRegion={{
-                                                    latitude: -28.968611980477235,
-                                                    longitude: -51.065032482147224,
-                                                    latitudeDelta: 0.014,
-                                                    longitudeDelta: 0.014
-                                                }}
+                                        Voltar
+                                    </Text>
+                            </TouchableOpacity>
+                                <View
+                                    style={ styles.subContainerContent }
+                                >
+                                    <Text
+                                        style={ styles.title }
+                                    >
+                                        😃 Bem-vindo.
+                                    </Text>
+                                    <Text
+                                        style={ styles.description }
+                                    >
+                                        Encontre no mapa um ponto de coleta.
+                                    </Text>
+                                        <View
+                                            style={ styles.mapContainer }
                                         >
-                                            <Marker
-                                                style={ styles.mapMarker }
-                                                    coordinate={{
+                                            <MapView
+                                                style={ styles.map }
+                                                    initialRegion={{
                                                         latitude: -28.968611980477235,
-                                                        longitude: -51.065032482147224
+                                                        longitude: -51.065032482147224,
+                                                        latitudeDelta: 0.014,
+                                                        longitudeDelta: 0.014
                                                     }}
-                                                        onPress={ handleNavigateToDetail }
                                             >
-                                                <View
-                                                    style={ styles.mapMarkerContainer }
+                                                <Marker
+                                                    style={ styles.mapMarker }
+                                                        coordinate={{
+                                                            latitude: -28.968611980477235,
+                                                            longitude: -51.065032482147224
+                                                        }}
+                                                            onPress={ handleNavigateToDetail }
                                                 >
-                                                    <Image
-                                                        style={ styles.mapMarkerImage }
-                                                            source={{
-                                                                uri: "https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
-                                                            }}
-                                                    />
-                                                        <Text
-                                                            style={ styles.mapMarkerTitle }
-                                                        >
-                                                            Mercado
-                                                        </Text>
-                                                </View>
-                                            </Marker>
-                                        </MapView>
-                                    </View>
+                                                    <View
+                                                        style={ styles.mapMarkerContainer }
+                                                    >
+                                                        <Image
+                                                            style={ styles.mapMarkerImage }
+                                                                source={{
+                                                                    uri: "https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
+                                                                }}
+                                                        />
+                                                            <Text
+                                                                style={ styles.mapMarkerTitle }
+                                                            >
+                                                                Mercado
+                                                            </Text>
+                                                    </View>
+                                                </Marker>
+                                            </MapView>
+                                        </View>
+                                </View>
                         </View>
-                        <View
-                            style={ styles.itemsContainer }
-                        >
-                            <ScrollView
-                                horizontal
-                                    showsHorizontalScrollIndicator={ false }
-                                        contentContainerStyle={{
-                                            paddingHorizontal: 30
-                                        }}
+                            <View
+                                style={ styles.subContainerItems }
                             >
-                                <TouchableOpacity
-                                    style={ styles.item }
-                                        onPress={ () => {} }
+                                <View
+                                    style={ styles.itemsContainer }
                                 >
-                                    <SvgUri
-                                        height={ 50 }
-                                            width={ 50 }
-                                                uri="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg"
-                                    />
-                                        <Text
-                                            style={ styles.itemTitle }
+                                    <ScrollView
+                                        horizontal
+                                            showsHorizontalScrollIndicator={ false }
+                                                contentContainerStyle={{
+                                                    paddingHorizontal: 30
+                                                }}
+                                    >
+                                        <TouchableOpacity
+                                            style={ styles.item }
+                                                onPress={ () => {} }
                                         >
-                                            Lâmpadas
-                                        </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={ styles.item }
-                                        onPress={ () => {} }
-                                >
-                                    <SvgUri
-                                        height={ 50 }
-                                            width={ 50 }
-                                                uri="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg"
-                                    />
-                                        <Text
-                                            style={ styles.itemTitle }
+                                            <SvgUri
+                                                height={ 50 }
+                                                    width={ 50 }
+                                                        uri="http://192.168.1.103:3333/uploads/lampadas_iluminacao.svg"
+                                            />
+                                                <Text
+                                                    style={ styles.itemTitle }
+                                                >
+                                                    Lâmpadas
+                                                </Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity
+                                            style={ styles.item }
+                                                onPress={ () => {} }
                                         >
-                                            Lâmpadas
-                                        </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={ styles.item }
-                                        onPress={ () => {} }
-                                >
-                                    <SvgUri
-                                        height={ 50 }
-                                            width={ 50 }
-                                                uri="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg"
-                                    />
-                                        <Text
-                                            style={ styles.itemTitle }
+                                            <SvgUri
+                                                height={ 50 }
+                                                    width={ 50 }
+                                                        uri="http://192.168.1.103:3333/uploads/lampadas_iluminacao.svg"
+                                            />
+                                                <Text
+                                                    style={ styles.itemTitle }
+                                                >
+                                                    Lâmpadas
+                                                </Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity
+                                            style={ styles.item }
+                                                onPress={ () => {} }
                                         >
-                                            Lâmpadas
-                                        </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={ styles.item }
-                                        onPress={ () => {} }
-                                >
-                                    <SvgUri
-                                        height={ 50 }
-                                            width={ 50 }
-                                                uri="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg"
-                                    />
-                                        <Text
-                                            style={ styles.itemTitle }
+                                            <SvgUri
+                                                height={ 50 }
+                                                    width={ 50 }
+                                                        uri="http://192.168.1.103:3333/uploads/lampadas_iluminacao.svg"
+                                            />
+                                                <Text
+                                                    style={ styles.itemTitle }
+                                                >
+                                                    Lâmpadas
+                                                </Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity
+                                            style={ styles.item }
+                                                onPress={ () => {} }
                                         >
-                                            Lâmpadas
-                                        </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={ styles.item }
-                                        onPress={ () => {} }
-                                >
-                                    <SvgUri
-                                        height={ 50 }
-                                            width={ 50 }
-                                                uri="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg"
-                                    />
-                                        <Text
-                                            style={ styles.itemTitle }
+                                            <SvgUri
+                                                height={ 50 }
+                                                    width={ 50 }
+                                                        uri="http://192.168.1.103:3333/uploads/lampadas_iluminacao.svg"
+                                            />
+                                                <Text
+                                                    style={ styles.itemTitle }
+                                                >
+                                                    Lâmpadas
+                                                </Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity
+                                            style={ styles.item }
+                                                onPress={ () => {} }
                                         >
-                                            Lâmpadas
-                                        </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={ styles.item }
-                                        onPress={ () => {} }
-                                >
-                                    <SvgUri
-                                        height={ 50 }
-                                            width={ 50 }
-                                                uri="http://192.168.1.101:3333/uploads/lampadas_iluminacao.svg"
-                                    />
-                                        <Text
-                                            style={ styles.itemTitle }
+                                            <SvgUri
+                                                height={ 50 }
+                                                    width={ 50 }
+                                                        uri="http://192.168.1.103:3333/uploads/lampadas_iluminacao.svg"
+                                            />
+                                                <Text
+                                                    style={ styles.itemTitle }
+                                                >
+                                                    Lâmpadas
+                                                </Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity
+                                            style={ styles.item }
+                                                onPress={ () => {} }
                                         >
-                                            Lâmpadas
-                                        </Text>
-                                </TouchableOpacity>
-                            </ScrollView>   
-                        </View>
+                                            <SvgUri
+                                                height={ 50 }
+                                                    width={ 50 }
+                                                        uri="http://192.168.1.103:3333/uploads/lampadas_iluminacao.svg"
+                                            />
+                                                <Text
+                                                    style={ styles.itemTitle }
+                                                >
+                                                    Lâmpadas
+                                                </Text>
+                                        </TouchableOpacity>
+                                    </ScrollView>
+                                </View>
+                            </View>
                     </>
                 );
     };
@@ -190,13 +204,34 @@ import { SvgUri } from "react-native-svg";
     const styles = StyleSheet.create({
         container: {
             paddingTop: 20 + Constants.statusBarHeight,
-            paddingBottom: 30,
-            paddingHorizontal: 30,
+            paddingHorizontal: 15,
             flex: 1
+        },
+        
+        navigation: {
+            marginLeft: 8,
+            flexDirection: "row",
+            alignItems: "center"
+        },
+
+        navigationText: {
+            marginLeft: 7.5,
+            fontFamily: "Roboto_500Medium",
+            fontSize: 16,
+            color: "#6C6C80"
+        },
+
+        subContainerContent: {
+            marginTop: 24,
+            paddingVertical: 15,
+            paddingHorizontal: 15,
+            flex: 1,
+            backgroundColor: "#FFFFFF",
+            borderTopLeftRadius: 10,
+            borderTopRightRadius: 10
         },
 
         title: {
-            marginTop: 24,
             fontFamily: "Ubuntu_700Bold",
             fontSize: 20
         },
@@ -232,7 +267,7 @@ import { SvgUri } from "react-native-svg";
             alignItems: "center",
             flexDirection: "column",
             backgroundColor: "#34CB79",
-            borderRadius: 8,
+            borderRadius: 10,
             overflow: "hidden"
         },
 
@@ -250,9 +285,19 @@ import { SvgUri } from "react-native-svg";
             lineHeight: 23
         },
 
+        subContainerItems: {
+            marginHorizontal: 15,
+            marginBottom: 30,
+            paddingTop: 15,
+            paddingBottom: 30,
+            backgroundColor: "#FFFFFF",
+            borderBottomLeftRadius: 10,
+            borderBottomRightRadius: 10
+        },
+
         itemsContainer: {
             marginTop: 0,
-            marginBottom: 30,
+            marginBottom: 0,
             flexDirection: "row"
         },
 
@@ -264,9 +309,9 @@ import { SvgUri } from "react-native-svg";
             alignItems: "center",
             justifyContent: "space-between",
             textAlign: "center",
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#F0F0F5",
             borderWidth: 2,
-            borderColor: "#FFFFFF",
+            borderColor: "#F0F0F5",
             borderRadius: 10 
         },
 

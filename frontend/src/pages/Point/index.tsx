@@ -191,7 +191,7 @@ import api from "../../services/api";
                                     >
                                         <FiLogOut/>
                                             <strong>
-                                                Voltar para a Home
+                                                Voltar
                                             </strong>
                                     </Link>
                             </header>

@@ -10,7 +10,7 @@ import knex from "../database/connection";
                 return {
                     id: item.id,
                     title: item.title,
-                    image_url: `http://192.168.1.101:3333/uploads/${item.image}`
+                    image_url: `http://192.168.1.103:3333/uploads/${item.image}`
                 };
             });
 
