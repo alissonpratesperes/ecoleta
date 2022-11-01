@@ -201,131 +201,128 @@ import { SvgUri } from "react-native-svg";
                 );
     };
 
-    const styles = StyleSheet.create({
-        container: {
-            paddingTop: 20 + Constants.statusBarHeight,
-            paddingHorizontal: 15,
-            flex: 1
-        },
-        
-        navigation: {
-            marginLeft: 8,
-            flexDirection: "row",
-            alignItems: "center"
-        },
+        const styles = StyleSheet.create({
+            container: {
+                paddingTop: 20 + Constants.statusBarHeight,
+                paddingHorizontal: 15,
+                flex: 1
+            },
+            
+            navigation: {
+                marginLeft: 8,
+                flexDirection: "row",
+                alignItems: "center"
+            },
 
-        navigationText: {
-            marginLeft: 7.5,
-            fontFamily: "Roboto_500Medium",
-            fontSize: 16,
-            color: "#6C6C80"
-        },
+            navigationText: {
+                marginLeft: 7.5,
+                fontFamily: "Roboto_500Medium",
+                fontSize: 16,
+                color: "#6C6C80"
+            },
 
-        subContainerContent: {
-            marginTop: 24,
-            paddingVertical: 15,
-            paddingHorizontal: 15,
-            flex: 1,
-            backgroundColor: "#FFFFFF",
-            borderTopLeftRadius: 10,
-            borderTopRightRadius: 10
-        },
+            subContainerContent: {
+                marginTop: 24,
+                paddingTop: 15,
+                paddingHorizontal: 15,
+                flex: 1,
+                backgroundColor: "#FFFFFF",
+                borderTopLeftRadius: 10,
+                borderTopRightRadius: 10
+            },
 
-        title: {
-            fontFamily: "Ubuntu_700Bold",
-            fontSize: 20
-        },
+            title: {
+                fontFamily: "Ubuntu_700Bold",
+                fontSize: 20
+            },
 
-        description: {
-            marginTop: 12,
-            fontFamily: "Roboto_400Regular",
-            fontSize: 16,
-            color: "#6C6C80"
-        },
+            description: {
+                marginTop: 12,
+                fontFamily: "Roboto_400Regular",
+                fontSize: 16,
+                color: "#6C6C80"
+            },
 
-        mapContainer: {
-            marginTop: 24,
-            width: "100%",
-            flex: 1,
-            borderRadius: 10,
-            overflow: "hidden"
-        },
+            mapContainer: {
+                marginTop: 24,
+                width: "100%",
+                flex: 1,
+                borderRadius: 10,
+                overflow: "hidden"
+            },
 
-        map: {
-            height: "100%",
-            width: "100%"
-        },
+            map: {
+                height: "100%",
+                width: "100%"
+            },
 
-        mapMarker: {
-            height: 80,
-            width: 90
-        },
+            mapMarker: {
+                height: 80,
+                width: 90
+            },
 
-        mapMarkerContainer: {
-            height: 70,
-            width: 90,
-            alignItems: "center",
-            flexDirection: "column",
-            backgroundColor: "#34CB79",
-            borderRadius: 10,
-            overflow: "hidden"
-        },
+            mapMarkerContainer: {
+                height: 70,
+                width: 90,
+                alignItems: "center",
+                flexDirection: "column",
+                backgroundColor: "#34CB79",
+                borderRadius: 10,
+                overflow: "hidden"
+            },
 
-        mapMarkerImage: {
-            height: 45,
-            width: 90,
-            resizeMode: "cover",
-        },
+            mapMarkerImage: {
+                height: 45,
+                width: 90,
+                resizeMode: "cover",
+            },
 
-        mapMarkerTitle: {
-            flex: 1,
-            fontFamily: "Roboto_400Regular",
-            fontSize: 14,
-            color: "#FFF",
-            lineHeight: 23
-        },
+            mapMarkerTitle: {
+                flex: 1,
+                fontFamily: "Roboto_400Regular",
+                fontSize: 14,
+                color: "#FFF",
+                lineHeight: 23
+            },
 
-        subContainerItems: {
-            marginHorizontal: 15,
-            marginBottom: 30,
-            paddingTop: 15,
-            paddingBottom: 30,
-            backgroundColor: "#FFFFFF",
-            borderBottomLeftRadius: 10,
-            borderBottomRightRadius: 10
-        },
+            subContainerItems: {
+                marginHorizontal: 15,
+                marginBottom: 30,
+                paddingVertical: 15,
+                backgroundColor: "#FFFFFF",
+                borderBottomLeftRadius: 10,
+                borderBottomRightRadius: 10
+            },
 
-        itemsContainer: {
-            marginTop: 0,
-            marginBottom: 0,
-            flexDirection: "row"
-        },
+            itemsContainer: {
+                flexDirection: "row"
+            },
 
-        item: {
-            marginRight: 15,
-            padding: 30,
-            height: 150,
-            width: 150,
-            alignItems: "center",
-            justifyContent: "space-between",
-            textAlign: "center",
-            backgroundColor: "#F0F0F5",
-            borderWidth: 2,
-            borderColor: "#F0F0F5",
-            borderRadius: 10 
-        },
+            item: {
+                marginRight: 15,
+                padding: 30,
+                height: 150,
+                width: 150,
+                alignItems: "center",
+                justifyContent: "space-between",
+                textAlign: "center",
+                backgroundColor: "#F0F0F5",
+                borderWidth: 2,
+                borderColor: "#F0F0F5",
+                borderRadius: 10 
+            },
 
-        itemTitle: {
-            fontFamily: "Roboto_400Regular",
-            fontSize: 14,
-            textAlign: "center",
-        },
+            itemTitle: {
+                fontFamily: "Roboto_400Regular",
+                fontSize: 14,
+                textAlign: "center",
+            },
 
-        selectedItem: {
-            backgroundColor: "#E1FAEC",
-            borderWidth: 2,
-            borderColor: "#34CB79"
-        }
-    });
+            selectedItem: {
+                backgroundColor: "#E1FAEC",
+                borderWidth: 2,
+                borderColor: "#34CB79"
+            }
+        });
 
-        export default Points;
+            export default Points;
