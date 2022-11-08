@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Constants from "expo-constants";
-import { View, StyleSheet, TouchableOpacity, Text, ScrollView, Image } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text, ScrollView, Image, Alert } from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import MapView, { Marker } from "react-native-maps";
 import { SvgUri } from "react-native-svg";
+import * as Location from "expo-location";
 
 import Item from "../../interfaces/Item";
 import api from "../../services/api";
@@ -12,8 +13,30 @@ import api from "../../services/api";
     const Points = () => {
         const [ items, setItems ] = useState<Item[]>([]);
         const [ selectedItems, setSelectedItems ] = useState<number[]>([]);
+        const [ initialPosition, setInitialPosition ] = useState<[number, number]>([0, 0]);
         const navigation = useNavigation();
 
+            useEffect(() => {
+                async function loadPosition() {
+                    const { status } = await Location.requestForegroundPermissionsAsync();
+
+                        if(status !== "granted") {
+                            Alert.alert("Ooops...", "Precisamos da sua permissão para obtermos a localização.");
+
+                                return;
+                        }
+
+                    const location = await Location.getCurrentPositionAsync();
+                    const { latitude, longitude } = location.coords;
+
+                        setInitialPosition([
+                            latitude,
+                            longitude
+                        ]);
+                };
+
+                    loadPosition();
+            }, []);
             useEffect(() => {
                 api.get("/items").then(response => {
                     setItems(response.data.serializedItems);
@@ -86,40 +109,42 @@ import api from "../../services/api";
                                             <View
                                                 style={ styles.mapContainer }
                                             >
-                                                <MapView
-                                                    style={ styles.map }
-                                                        initialRegion={{
-                                                            latitude: -28.968611980477235,
-                                                            longitude: -51.065032482147224,
-                                                            latitudeDelta: 0.014,
-                                                            longitudeDelta: 0.014
-                                                        }}
-                                                >
-                                                    <Marker
-                                                        style={ styles.mapMarker }
-                                                            coordinate={{
-                                                                latitude: -28.968611980477235,
-                                                                longitude: -51.065032482147224
+                                                { initialPosition[0] !== 0 && (
+                                                    <MapView
+                                                        style={ styles.map }
+                                                            initialRegion={{
+                                                                latitude: initialPosition[0],
+                                                                longitude: initialPosition[1],
+                                                                latitudeDelta: 0.014,
+                                                                longitudeDelta: 0.014
                                                             }}
-                                                                onPress={ handleNavigateToDetail }
                                                     >
-                                                        <View
-                                                            style={ styles.mapMarkerContainer }
+                                                        <Marker
+                                                            style={ styles.mapMarker }
+                                                                coordinate={{
+                                                                    latitude: -28.968611980477235,
+                                                                    longitude: -51.065032482147224
+                                                                }}
+                                                                    onPress={ handleNavigateToDetail }
                                                         >
-                                                            <Image
-                                                                style={ styles.mapMarkerImage }
-                                                                    source={{
-                                                                        uri: "https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
-                                                                    }}
-                                                            />
-                                                                <Text
-                                                                    style={ styles.mapMarkerTitle }
-                                                                >
-                                                                    Mercado
-                                                                </Text>
-                                                        </View>
-                                                    </Marker>
-                                                </MapView>
+                                                            <View
+                                                                style={ styles.mapMarkerContainer }
+                                                            >
+                                                                <Image
+                                                                    style={ styles.mapMarkerImage }
+                                                                        source={{
+                                                                            uri: "https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
+                                                                        }}
+                                                                />
+                                                                    <Text
+                                                                        style={ styles.mapMarkerTitle }
+                                                                    >
+                                                                        Mercado
+                                                                    </Text>
+                                                            </View>
+                                                        </Marker>
+                                                    </MapView>
+                                                ) }
                                             </View>
                                     </View>
                             </View>
