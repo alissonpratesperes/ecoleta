@@ -7,10 +7,12 @@ import MapView, { Marker } from "react-native-maps";
 import { SvgUri } from "react-native-svg";
 import * as Location from "expo-location";
 
+import Point from "../../interfaces/Point";
 import Item from "../../interfaces/Item";
 import api from "../../services/api";
 
     const Points = () => {
+        const [ points, setPoints ] = useState<Point[]>([]);
         const [ items, setItems ] = useState<Item[]>([]);
         const [ selectedItems, setSelectedItems ] = useState<number[]>([]);
         const [ initialPosition, setInitialPosition ] = useState<[number, number]>([0, 0]);
@@ -21,7 +23,10 @@ import api from "../../services/api";
                     const { status } = await Location.requestForegroundPermissionsAsync();
 
                         if(status !== "granted") {
-                            Alert.alert("Ooops...", "Precisamos da sua permissão para obtermos a localização.");
+                            Alert.alert(
+                                "Ooops...",
+                                "Precisamos da sua permissão para obtermos a localização."
+                            );
 
                                 return;
                         }
@@ -38,17 +43,35 @@ import api from "../../services/api";
                     loadPosition();
             }, []);
             useEffect(() => {
+                api.get("/points", {
+                    params: {
+                        city: "São Marcos",
+                        uf: "RS",
+                        items: [6, 1]
+                    }
+                }).then(response => {
+                    setPoints(
+                        response.data.points
+                    );
+                });
+            }, []);
+            useEffect(() => {
                 api.get("/items").then(response => {
-                    setItems(response.data.serializedItems);
+                    setItems(
+                        response.data.serializedItems
+                    );
                 });
             }, []);
 
                 function handleNavigateBack() {
                     navigation.goBack();
                 };
-                function handleNavigateToDetail() {
+                function handleNavigateToDetail(id: number) {
                     navigation.navigate(
-                        "Detail" as never
+                        "Detail" as never,
+                            {
+                                point_id: id
+                            } as never
                     );
                 };
                 function handleSelectItem(id: number) {
@@ -119,30 +142,33 @@ import api from "../../services/api";
                                                                 longitudeDelta: 0.014
                                                             }}
                                                     >
-                                                        <Marker
-                                                            style={ styles.mapMarker }
-                                                                coordinate={{
-                                                                    latitude: -28.968611980477235,
-                                                                    longitude: -51.065032482147224
-                                                                }}
-                                                                    onPress={ handleNavigateToDetail }
-                                                        >
-                                                            <View
-                                                                style={ styles.mapMarkerContainer }
-                                                            >
-                                                                <Image
-                                                                    style={ styles.mapMarkerImage }
-                                                                        source={{
-                                                                            uri: "https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
+                                                        { points.map(point => (
+                                                            <Marker
+                                                                key={ String(point.id) }
+                                                                    style={ styles.mapMarker }
+                                                                        coordinate={{
+                                                                            latitude: point.latitude,
+                                                                            longitude: point.longitude
                                                                         }}
-                                                                />
-                                                                    <Text
-                                                                        style={ styles.mapMarkerTitle }
-                                                                    >
-                                                                        Mercado
-                                                                    </Text>
-                                                            </View>
-                                                        </Marker>
+                                                                            onPress={ () => handleNavigateToDetail(point.id) }
+                                                            >
+                                                                <View
+                                                                    style={ styles.mapMarkerContainer }
+                                                                >
+                                                                    <Image
+                                                                        style={ styles.mapMarkerImage }
+                                                                            source={{
+                                                                                uri: point.image
+                                                                            }}
+                                                                    />
+                                                                        <Text
+                                                                            style={ styles.mapMarkerTitle }
+                                                                        >
+                                                                            { point.name }
+                                                                        </Text>
+                                                                </View>
+                                                            </Marker>
+                                                        )) }
                                                     </MapView>
                                                 ) }
                                             </View>
@@ -163,12 +189,12 @@ import api from "../../services/api";
                                         >
                                             { items.map(item => (
                                                 <TouchableOpacity
-                                                    style={ [
-                                                        styles.item,
-                                                            selectedItems.includes(item.id) ? styles.selectedItem : { }
-                                                    ] }
-                                                        onPress={ () => handleSelectItem(item.id) }
-                                                            key={ String(item.id) }
+                                                    key={ String(item.id) }
+                                                        style={ [
+                                                            styles.item,
+                                                                selectedItems.includes(item.id) ? styles.selectedItem : { }
+                                                        ] }
+                                                            onPress={ () => handleSelectItem(item.id) }
                                                                 activeOpacity={ 0.6 }
                                                 >
                                                     <SvgUri
