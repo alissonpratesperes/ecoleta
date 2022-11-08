@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Constants from "expo-constants";
 import { View, StyleSheet, TouchableOpacity, Text, ScrollView, Image } from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
@@ -6,199 +6,163 @@ import { useNavigation } from "@react-navigation/native";
 import MapView, { Marker } from "react-native-maps";
 import { SvgUri } from "react-native-svg";
 
+import Item from "../../interfaces/Item";
+import api from "../../services/api";
+
     const Points = () => {
+        const [ items, setItems ] = useState<Item[]>([]);
+        const [ selectedItems, setSelectedItems ] = useState<number[]>([]);
         const navigation = useNavigation();
 
-            function handleNavigateBack() {
-                navigation.goBack();
-            };
-            function handleNavigateToDetail() {
-                navigation.navigate(
-                    "Detail" as never
-                );
-            };
+            useEffect(() => {
+                api.get("/items").then(response => {
+                    setItems(response.data.serializedItems);
+                });
+            }, []);
 
-                return (
-                    <>
-                        <View
-                            style={ styles.container }
-                        >
-                            <TouchableOpacity
-                                style={ styles.navigation }
-                                    onPress={ handleNavigateBack }
-                            >
-                                <Icon
-                                    name="log-out"
-                                    size={ 25 }
-                                    color="#34CB79"
-                                />
-                                    <Text
-                                        style={ styles.navigationText }
-                                    >
-                                        Voltar
-                                    </Text>
-                            </TouchableOpacity>
-                                <View
-                                    style={ styles.subContainerContent }
-                                >
-                                    <Text
-                                        style={ styles.title }
-                                    >
-                                        😃 Bem-vindo.
-                                    </Text>
-                                    <Text
-                                        style={ styles.description }
-                                    >
-                                        Encontre no mapa um ponto de coleta.
-                                    </Text>
-                                        <View
-                                            style={ styles.mapContainer }
-                                        >
-                                            <MapView
-                                                style={ styles.map }
-                                                    initialRegion={{
-                                                        latitude: -28.968611980477235,
-                                                        longitude: -51.065032482147224,
-                                                        latitudeDelta: 0.014,
-                                                        longitudeDelta: 0.014
-                                                    }}
-                                            >
-                                                <Marker
-                                                    style={ styles.mapMarker }
-                                                        coordinate={{
-                                                            latitude: -28.968611980477235,
-                                                            longitude: -51.065032482147224
-                                                        }}
-                                                            onPress={ handleNavigateToDetail }
-                                                >
-                                                    <View
-                                                        style={ styles.mapMarkerContainer }
-                                                    >
-                                                        <Image
-                                                            style={ styles.mapMarkerImage }
-                                                                source={{
-                                                                    uri: "https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
-                                                                }}
-                                                        />
-                                                            <Text
-                                                                style={ styles.mapMarkerTitle }
-                                                            >
-                                                                Mercado
-                                                            </Text>
-                                                    </View>
-                                                </Marker>
-                                            </MapView>
-                                        </View>
-                                </View>
-                        </View>
+                function handleNavigateBack() {
+                    navigation.goBack();
+                };
+                function handleNavigateToDetail() {
+                    navigation.navigate(
+                        "Detail" as never
+                    );
+                };
+                function handleSelectItem(id: number) {
+                    const alreadySelectedItem = selectedItems.findIndex(
+                        item => item === id
+                    );
+
+                        if(alreadySelectedItem >= 0) {
+                            const filteredItems = selectedItems.filter(
+                                item => item !== id
+                            );
+
+                                setSelectedItems(
+                                    filteredItems
+                                );
+                        } else {
+                            setSelectedItems([
+                                ...selectedItems,
+                                    id
+                            ]);
+                        };
+                    
+                };
+
+                    return (
+                        <>
                             <View
-                                style={ styles.subContainerItems }
+                                style={ styles.container }
                             >
-                                <View
-                                    style={ styles.itemsContainer }
+                                <TouchableOpacity
+                                    style={ styles.navigation }
+                                        onPress={ handleNavigateBack }
                                 >
-                                    <ScrollView
-                                        horizontal
-                                            showsHorizontalScrollIndicator={ false }
-                                                contentContainerStyle={{
-                                                    paddingHorizontal: 30
-                                                }}
+                                    <Icon
+                                        name="log-out"
+                                        size={ 25 }
+                                        color="#34CB79"
+                                    />
+                                        <Text
+                                            style={ styles.navigationText }
+                                        >
+                                            Voltar
+                                        </Text>
+                                </TouchableOpacity>
+                                    <View
+                                        style={ styles.subContainerContent }
                                     >
-                                        <TouchableOpacity
-                                            style={ styles.item }
-                                                onPress={ () => {} }
+                                        <Text
+                                            style={ styles.title }
                                         >
-                                            <SvgUri
-                                                height={ 50 }
-                                                    width={ 50 }
-                                                        uri="http://192.168.1.103:3333/uploads/lampadas_iluminacao.svg"
-                                            />
-                                                <Text
-                                                    style={ styles.itemTitle }
-                                                >
-                                                    Lâmpadas
-                                                </Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity
-                                            style={ styles.item }
-                                                onPress={ () => {} }
+                                            😃 Bem-vindo.
+                                        </Text>
+                                        <Text
+                                            style={ styles.description }
                                         >
-                                            <SvgUri
-                                                height={ 50 }
-                                                    width={ 50 }
-                                                        uri="http://192.168.1.103:3333/uploads/lampadas_iluminacao.svg"
-                                            />
-                                                <Text
-                                                    style={ styles.itemTitle }
+                                            Encontre no mapa um ponto de coleta.
+                                        </Text>
+                                            <View
+                                                style={ styles.mapContainer }
+                                            >
+                                                <MapView
+                                                    style={ styles.map }
+                                                        initialRegion={{
+                                                            latitude: -28.968611980477235,
+                                                            longitude: -51.065032482147224,
+                                                            latitudeDelta: 0.014,
+                                                            longitudeDelta: 0.014
+                                                        }}
                                                 >
-                                                    Lâmpadas
-                                                </Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity
-                                            style={ styles.item }
-                                                onPress={ () => {} }
-                                        >
-                                            <SvgUri
-                                                height={ 50 }
-                                                    width={ 50 }
-                                                        uri="http://192.168.1.103:3333/uploads/lampadas_iluminacao.svg"
-                                            />
-                                                <Text
-                                                    style={ styles.itemTitle }
-                                                >
-                                                    Lâmpadas
-                                                </Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity
-                                            style={ styles.item }
-                                                onPress={ () => {} }
-                                        >
-                                            <SvgUri
-                                                height={ 50 }
-                                                    width={ 50 }
-                                                        uri="http://192.168.1.103:3333/uploads/lampadas_iluminacao.svg"
-                                            />
-                                                <Text
-                                                    style={ styles.itemTitle }
-                                                >
-                                                    Lâmpadas
-                                                </Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity
-                                            style={ styles.item }
-                                                onPress={ () => {} }
-                                        >
-                                            <SvgUri
-                                                height={ 50 }
-                                                    width={ 50 }
-                                                        uri="http://192.168.1.103:3333/uploads/lampadas_iluminacao.svg"
-                                            />
-                                                <Text
-                                                    style={ styles.itemTitle }
-                                                >
-                                                    Lâmpadas
-                                                </Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity
-                                            style={ styles.item }
-                                                onPress={ () => {} }
-                                        >
-                                            <SvgUri
-                                                height={ 50 }
-                                                    width={ 50 }
-                                                        uri="http://192.168.1.103:3333/uploads/lampadas_iluminacao.svg"
-                                            />
-                                                <Text
-                                                    style={ styles.itemTitle }
-                                                >
-                                                    Lâmpadas
-                                                </Text>
-                                        </TouchableOpacity>
-                                    </ScrollView>
-                                </View>
+                                                    <Marker
+                                                        style={ styles.mapMarker }
+                                                            coordinate={{
+                                                                latitude: -28.968611980477235,
+                                                                longitude: -51.065032482147224
+                                                            }}
+                                                                onPress={ handleNavigateToDetail }
+                                                    >
+                                                        <View
+                                                            style={ styles.mapMarkerContainer }
+                                                        >
+                                                            <Image
+                                                                style={ styles.mapMarkerImage }
+                                                                    source={{
+                                                                        uri: "https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
+                                                                    }}
+                                                            />
+                                                                <Text
+                                                                    style={ styles.mapMarkerTitle }
+                                                                >
+                                                                    Mercado
+                                                                </Text>
+                                                        </View>
+                                                    </Marker>
+                                                </MapView>
+                                            </View>
+                                    </View>
                             </View>
-                    </>
-                );
+                                <View
+                                    style={ styles.subContainerItems }
+                                >
+                                    <View
+                                        style={ styles.itemsContainer }
+                                    >
+                                        <ScrollView
+                                            horizontal
+                                                showsHorizontalScrollIndicator={ false }
+                                                    contentContainerStyle={{
+                                                        paddingHorizontal: 30
+                                                    }}
+                                        >
+                                            { items.map(item => (
+                                                <TouchableOpacity
+                                                    style={ [
+                                                        styles.item,
+                                                            selectedItems.includes(item.id) ? styles.selectedItem : { }
+                                                    ] }
+                                                        onPress={ () => handleSelectItem(item.id) }
+                                                            key={ String(item.id) }
+                                                                activeOpacity={ 0.6 }
+                                                >
+                                                    <SvgUri
+                                                        height={ 50 }
+                                                            width={ 50 }
+                                                                uri={ item.image_url }
+                                                    />
+                                                        <Text
+                                                            style={ styles.itemTitle }
+                                                        >
+                                                            { item.title }
+                                                        </Text>
+                                                </TouchableOpacity>
+                                            )) }
+                                        </ScrollView>
+                                    </View>
+                                </View>
+                        </>
+                    );
     };
 
         const styles = StyleSheet.create({
@@ -300,7 +264,7 @@ import { SvgUri } from "react-native-svg";
 
             item: {
                 marginRight: 15,
-                padding: 30,
+                padding: 25,
                 height: 150,
                 width: 150,
                 alignItems: "center",

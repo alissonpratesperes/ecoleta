@@ -58,7 +58,7 @@ import { useNavigation } from "@react-navigation/native";
                                         <Text
                                             style={ styles.buttonText }
                                         >
-                                            Entrar
+                                            Busque pontos de coleta
                                         </Text>
                                 </RectButton>
                             </View>
