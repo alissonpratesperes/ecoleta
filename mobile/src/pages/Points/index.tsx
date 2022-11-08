@@ -20,7 +20,9 @@ import api from "../../services/api";
 
             useEffect(() => {
                 async function loadPosition() {
-                    const { status } = await Location.requestForegroundPermissionsAsync();
+                    const {
+                        status
+                    } = await Location.requestForegroundPermissionsAsync();
 
                         if(status !== "granted") {
                             Alert.alert(
@@ -32,7 +34,10 @@ import api from "../../services/api";
                         }
 
                     const location = await Location.getCurrentPositionAsync();
-                    const { latitude, longitude } = location.coords;
+                    const {
+                        latitude,
+                        longitude
+                    } = location.coords;
 
                         setInitialPosition([
                             latitude,
@@ -107,8 +112,8 @@ import api from "../../services/api";
                                 >
                                     <Icon
                                         name="log-out"
-                                        size={ 25 }
-                                        color="#34CB79"
+                                            size={ 25 }
+                                                color="#34CB79"
                                     />
                                         <Text
                                             style={ styles.navigationText }
@@ -138,14 +143,14 @@ import api from "../../services/api";
                                                             initialRegion={{
                                                                 latitude: initialPosition[0],
                                                                 longitude: initialPosition[1],
-                                                                latitudeDelta: 0.014,
-                                                                longitudeDelta: 0.014
+                                                                    latitudeDelta: 0.014,
+                                                                    longitudeDelta: 0.014
                                                             }}
                                                     >
                                                         { points.map(point => (
                                                             <Marker
-                                                                key={ String(point.id) }
-                                                                    style={ styles.mapMarker }
+                                                                style={ styles.mapMarker }
+                                                                    key={ String(point.id) }
                                                                         coordinate={{
                                                                             latitude: point.latitude,
                                                                             longitude: point.longitude
@@ -174,44 +179,44 @@ import api from "../../services/api";
                                             </View>
                                     </View>
                             </View>
+                            <View
+                                style={ styles.subContainerItems }
+                            >
                                 <View
-                                    style={ styles.subContainerItems }
+                                    style={ styles.itemsContainer }
                                 >
-                                    <View
-                                        style={ styles.itemsContainer }
+                                    <ScrollView
+                                        horizontal
+                                            showsHorizontalScrollIndicator={ false }
+                                                contentContainerStyle={{
+                                                    paddingHorizontal: 30
+                                                }}
                                     >
-                                        <ScrollView
-                                            horizontal
-                                                showsHorizontalScrollIndicator={ false }
-                                                    contentContainerStyle={{
-                                                        paddingHorizontal: 30
-                                                    }}
-                                        >
-                                            { items.map(item => (
-                                                <TouchableOpacity
-                                                    key={ String(item.id) }
-                                                        style={ [
-                                                            styles.item,
-                                                                selectedItems.includes(item.id) ? styles.selectedItem : { }
-                                                        ] }
+                                        { items.map(item => (
+                                            <TouchableOpacity
+                                                style={[
+                                                    styles.item,
+                                                        selectedItems.includes(item.id) ? styles.selectedItem : { }
+                                                ]}
+                                                    activeOpacity={ 0.6 }
+                                                        key={ String(item.id) }
                                                             onPress={ () => handleSelectItem(item.id) }
-                                                                activeOpacity={ 0.6 }
-                                                >
-                                                    <SvgUri
-                                                        height={ 50 }
-                                                            width={ 50 }
-                                                                uri={ item.image_url }
-                                                    />
-                                                        <Text
-                                                            style={ styles.itemTitle }
-                                                        >
-                                                            { item.title }
-                                                        </Text>
-                                                </TouchableOpacity>
-                                            )) }
-                                        </ScrollView>
-                                    </View>
+                                            >
+                                                <SvgUri
+                                                    height={ 50 }
+                                                        width={ 50 }
+                                                            uri={ item.image_url }
+                                                />
+                                                    <Text
+                                                        style={ styles.itemTitle }
+                                                    >
+                                                        { item.title }
+                                                    </Text>
+                                            </TouchableOpacity>
+                                        )) }
+                                    </ScrollView>
                                 </View>
+                            </View>
                         </>
                     );
     };
