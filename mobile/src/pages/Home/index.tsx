@@ -26,7 +26,9 @@ import { useNavigation } from "@react-navigation/native";
                             style={ styles.main }
                         >
                             <Image
-                                source={ require("../../assets/logo.png") }
+                                source={
+                                    require("../../assets/logo.png")
+                                }
                             />
                                 <Text
                                     style={ styles.slogan }

@@ -61,7 +61,9 @@ import api from "../../services/api";
                 });
             }, []);
             useEffect(() => {
-                api.get("/items").then(response => {
+                api.get(
+                    "/items"
+                ).then(response => {
                     setItems(
                         response.data.serializedItems
                     );

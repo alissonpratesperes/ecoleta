@@ -1,108 +1,131 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Constants from "expo-constants";
 import { View, StyleSheet, TouchableOpacity, Text, Image } from "react-native";
 import { Feather as Icon, FontAwesome as FaIcon } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { RectButton } from "react-native-gesture-handler";
 
+import Param from "../../interfaces/Param";
+import Data from "../../interfaces/Data";
+import api from "../../services/api";
+
     const Detail = () => {
+        const [ data, setData ] = useState<Data>({} as Data);
         const navigation = useNavigation();
         const route = useRoute();
-            console.log(route.params);
+        const routeParams = route.params as Param;
 
-            function handleNavigateBack() {
-                navigation.goBack();
-            };
+            useEffect(() => {
+                api.get(
+                    `/points/${routeParams.point_id}`
+                ).then(response => {
+                    setData(response.data);
+                });
+            }, []);
 
-                return (
-                    <>
-                        <View
-                            style={ styles.container }
-                        >
-                            <TouchableOpacity
-                                style={ styles.navigation }
-                                    onPress={ handleNavigateBack }
-                            >
-                                <Icon
-                                    name="log-out"
-                                        size={ 25 }
-                                            color="#34CB79"
-                                />
-                                    <Text
-                                        style={ styles.navigationText }
-                                    >
-                                        Voltar
-                                    </Text>
-                            </TouchableOpacity>
+                function handleNavigateBack() {
+                    navigation.goBack();
+                };
+
+                    if(!data.point) {
+                        return null;
+                    };  
+
+                        return (
+                            <>
                                 <View
-                                    style={ styles.subContainerContent }
+                                    style={ styles.container }
                                 >
-                                    <Image
-                                        style={ styles.pointImage }
-                                            source={{ uri: "https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" }}
-                                    />
-                                        <Text
-                                            style={ styles.pointName }
-                                        >
-                                            Mercadão do João
-                                        </Text>
-                                        <Text
-                                            style={ styles.pointItems }
-                                        >
-                                            Lâmpadas, Óleo de Cozinha
-                                        </Text>
-                                            <View
-                                                style={ styles.address }
+                                    <TouchableOpacity
+                                        style={ styles.navigation }
+                                            onPress={ handleNavigateBack }
+                                    >
+                                        <Icon
+                                            name="log-out"
+                                                size={ 25 }
+                                                    color="#34CB79"
+                                        />
+                                            <Text
+                                                style={ styles.navigationText }
                                             >
+                                                Voltar
+                                            </Text>
+                                    </TouchableOpacity>
+                                        <View
+                                            style={ styles.subContainerContent }
+                                        >
+                                            <Image
+                                                style={ styles.pointImage }
+                                                    source={{
+                                                        uri: data.point.image
+                                                    }}
+                                            />
                                                 <Text
-                                                    style={ styles.addressTitle }
+                                                    style={ styles.pointName }
                                                 >
-                                                    Endereço
+                                                    { data.point.name }
                                                 </Text>
                                                 <Text
-                                                    style={ styles.addressContent }
+                                                    style={ styles.pointItems }
                                                 >
-                                                    Rio do Sul, SC
+                                                    { data.items.map(item =>
+                                                        item.title
+                                                    ).join(
+                                                        ", "
+                                                    ) }
                                                 </Text>
-                                            </View>
+                                                    <View
+                                                        style={ styles.address }
+                                                    >
+                                                        <Text
+                                                            style={ styles.addressTitle }
+                                                        >
+                                                            Endereço
+                                                        </Text>
+                                                        <Text
+                                                            style={ styles.addressContent }
+                                                        >
+                                                            { data.point.city }, { data.point.uf }
+                                                        </Text>
+                                                    </View>
+                                        </View>
                                 </View>
-                        </View>
-                        <View
-                            style={ styles.footer }
-                        >
-                            <RectButton
-                                style={ styles.button }
-                                    onPress={ () => {} }
-                            >
-                                <FaIcon
-                                    name="whatsapp"
-                                        size={ 25 }
-                                            color="#FFFFFF"
-                                />
-                                    <Text
-                                        style={ styles.buttonText }
+                                <View
+                                    style={ styles.footer }
+                                >
+                                    <RectButton
+                                        style={ styles.button }
+                                            onPress={ () => {} }
                                     >
-                                        WhatsApp
-                                    </Text>
-                            </RectButton>
-                            <RectButton
-                                style={ styles.button }
-                                    onPress={ () => {} }
-                            >
-                                <Icon
-                                    name="mail"
-                                        size={ 25 }
-                                            color="#FFFFFF"
-                                />
-                                    <Text
-                                        style={ styles.buttonText }
+                                        <FaIcon
+                                            name="whatsapp"
+                                                size={ 25 }
+                                                    color="#FFFFFF"
+                                        />
+                                            <Text
+                                                style={ styles.buttonText }
+                                            >
+                                                WhatsApp
+                                            </Text>
+                                    </RectButton>
+                                    <RectButton
+                                        style={ styles.button }
+                                            onPress={ () => {} }
                                     >
-                                        E-mail
-                                    </Text>
-                            </RectButton>
-                        </View>
-                    </>
-                );
+                                        <Icon
+                                            name="mail"
+                                                size={ 25 }
+                                                    color="#FFFFFF"
+                                        />
+                                            <Text
+                                                style={ styles.buttonText }
+                                            >
+                                                E-mail
+                                            </Text>
+                                    </RectButton>
+                                </View>
+                            </>
+                        );
     };
 
         const styles = StyleSheet.create({
