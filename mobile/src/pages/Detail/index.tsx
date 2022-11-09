@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Constants from "expo-constants";
-import { View, StyleSheet, TouchableOpacity, Text, Image } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text, Image, Linking } from "react-native";
 import { Feather as Icon, FontAwesome as FaIcon } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { RectButton } from "react-native-gesture-handler";
+import * as MailComposer from "expo-mail-composer";
 
 import Param from "../../interfaces/Param";
 import Data from "../../interfaces/Data";
@@ -14,6 +15,7 @@ import api from "../../services/api";
         const navigation = useNavigation();
         const route = useRoute();
         const routeParams = route.params as Param;
+        const message = "Interesse na coleta de resíduos.";
 
             useEffect(() => {
                 api.get(
@@ -25,6 +27,17 @@ import api from "../../services/api";
 
                 function handleNavigateBack() {
                     navigation.goBack();
+                };
+                function handleComposeWhatsApp() {
+                    Linking.openURL(
+                        `whatsapp://send?phone=${data.point.whatsapp}&text=${message}`
+                    );
+                };
+                function handleComposeMail() {
+                    MailComposer.composeAsync({
+                        recipients: [ data.point.email ],
+                            subject: message
+                    });
                 };
 
                     if(!data.point) {
@@ -95,7 +108,7 @@ import api from "../../services/api";
                                 >
                                     <RectButton
                                         style={ styles.button }
-                                            onPress={ () => {} }
+                                            onPress={ handleComposeWhatsApp }
                                     >
                                         <FaIcon
                                             name="whatsapp"
@@ -110,7 +123,7 @@ import api from "../../services/api";
                                     </RectButton>
                                     <RectButton
                                         style={ styles.button }
-                                            onPress={ () => {} }
+                                            onPress={ handleComposeMail }
                                     >
                                         <Icon
                                             name="mail"
