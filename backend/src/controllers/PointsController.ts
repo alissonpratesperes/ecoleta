@@ -23,8 +23,15 @@ import knex from "../database/connection";
                 .distinct()
                 .select("points.*");
 
+            const serializedPoints = points.map((point: any) => {
+                return {
+                    ...point,
+                        image_url: `http://192.168.1.103:3333/images/${point.image}`
+                };
+            });
+
                 return response.status(200).json({
-                    points
+                    serializedPoints
                 });
         };
 
@@ -44,13 +51,18 @@ import knex from "../database/connection";
                     });
                 };
 
+            const serializedPoint = {
+                ...point,
+                    image_url: `http://192.168.1.103:3333/images/${point.image}`
+            };
+
             const items = await knex("items")
                 .join("point_items", "items.id", "=", "point_items.item_id")
                 .where("point_items.point_id", id)
                 .select("items.title");
 
                 return response.status(200).json({
-                    point,
+                    point: serializedPoint,
                     items
                 });
         };
@@ -68,7 +80,7 @@ import knex from "../database/connection";
             } = request.body;
 
             const point = {
-                image: "https://images.unsplash.com/photo-1556767576-5ec41e3239ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
+                image: request.file?.filename,
                 name,
                 email,
                 whatsapp,
@@ -83,11 +95,14 @@ import knex from "../database/connection";
 
             const point_id = insertedPointId[0];
 
-            const pointItems = items.map((item_id: number) => {
-                return {
-                    point_id,
-                    item_id
-                };
+            const pointItems = items
+                .split(",")
+                .map((item: string) => Number(item.trim()))
+                .map((item_id: number) => {
+                    return {
+                        point_id,
+                        item_id
+                    };
             });
 
                 await knex("point_items")

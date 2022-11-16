@@ -23,6 +23,14 @@ import routes from "./routes";
                     )
                 )
         );
+        app.use(
+            "/images",
+                express.static(
+                    path.resolve(
+                        __dirname, "..", "images"
+                    )
+                )
+        );
 
             app.listen(
                 3333
