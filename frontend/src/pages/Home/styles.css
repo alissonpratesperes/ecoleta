@@ -21,6 +21,10 @@ div#home div.content header {
     margin: 48px 0px 0px 0px;
 }
 
+div#home div.content header img {
+    margin-left: 8px;
+}
+
 div#home div.content main {
     flex: 1;
     max-width: 560px;

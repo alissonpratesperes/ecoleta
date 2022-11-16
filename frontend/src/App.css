@@ -19,3 +19,7 @@
     body, input, button {
         font-family: Roboto, Arial, Arial, Helvetica, sans-serif;
     }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }

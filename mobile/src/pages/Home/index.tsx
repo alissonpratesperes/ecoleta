@@ -26,9 +26,7 @@ import { useNavigation } from "@react-navigation/native";
                             style={ styles.main }
                         >
                             <Image
-                                source={
-                                    require("../../assets/logo.png")
-                                }
+                                source={ require("../../assets/logo.png") }
                             />
                                 <Text
                                     style={ styles.slogan }
@@ -41,29 +39,29 @@ import { useNavigation } from "@react-navigation/native";
                                     Ajudamos pessoas a encontrarem pontos de coleta de forma eficiente.
                                 </Text>
                         </View>
-                        <View>
-                            <RectButton
-                                style={ styles.button }
-                                    onPress={ handleNavigateToPoints }
-                            >
-                                <View
-                                    style={ styles.buttonIcon }
+                            <View>
+                                <RectButton
+                                    style={ styles.button }
+                                        onPress={ handleNavigateToPoints }
                                 >
-                                    <Text>
-                                        <Icon
-                                            name="log-in"
-                                                size={ 25 }
-                                                    color="#FFFFFF"
-                                        />
-                                    </Text> 
-                                </View>
-                                    <Text
-                                        style={ styles.buttonText }
+                                    <View
+                                        style={ styles.buttonIcon }
                                     >
-                                        Busque pontos de coleta
-                                    </Text>
-                            </RectButton>
-                        </View>
+                                        <Text>
+                                            <Icon
+                                                name="log-in"
+                                                size={ 25 }
+                                                color="#FFFFFF"
+                                            />
+                                        </Text> 
+                                    </View>
+                                        <Text
+                                            style={ styles.buttonText }
+                                        >
+                                            Entrar
+                                        </Text>
+                                </RectButton>
+                            </View>
                     </ImageBackground>
                 );
     };
