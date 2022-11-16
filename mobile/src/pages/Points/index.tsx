@@ -168,7 +168,7 @@ import api from "../../services/api";
                                                                     <Image
                                                                         style={ styles.mapMarkerImage }
                                                                             source={{
-                                                                                uri: point.image
+                                                                                uri: point.image_url
                                                                             }}
                                                                     />
                                                                         <Text
