@@ -7,34 +7,19 @@ import "./styles.css";
 
     const Home = () => {
         return (
-            <div
-                id="home"
-            >
-                <div
-                    className="content"
-                >
+            <div id="home">
+                <div className="content">
                     <header>
-                        <img
-                            alt="Ecoleta"
-                                src={logo}
-                        />
+                        <img alt="Ecoleta" src={logo}/>
                     </header>
                         <main>
-                            <h1>
-                                Seu marketplace de coleta de resíduos.
-                            </h1>
-                                <p>
-                                    Ajudamos pessoas a encontrarem pontos de coleta de forma eficiente.
-                                </p>
-                                    <Link
-                                        to="/point"
-                                    >
+                            <h1> Seu marketplace de coleta de resíduos. </h1>
+                                <p> Ajudamos pessoas a encontrarem pontos de coleta de forma eficiente. </p>
+                                    <Link to="/point">
                                         <span>
                                             <FiLogIn/>
                                         </span>
-                                            <strong>
-                                                Cadastre um novo ponto de coleta
-                                            </strong>
+                                            <strong> Cadastre um novo ponto de coleta </strong>
                                     </Link>
                         </main>
                 </div>

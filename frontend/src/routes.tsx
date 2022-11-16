@@ -8,14 +8,8 @@ import Point from "./pages/Point";
         return (
             <BrowserRouter>
                 <Routes>
-                    <Route
-                        path="/"
-                            element={ <Home/> }
-                    />
-                    <Route
-                        path="/point"
-                            element={ <Point/> }
-                    />
+                    <Route path="/" element={ <Home/> }/>
+                    <Route path="/point" element={ <Point/> }/>
                 </Routes>
             </BrowserRouter>
         );

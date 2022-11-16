@@ -12,42 +12,23 @@ import "./styles.css";
             const fileUrl = URL.createObjectURL(file);
 
                 setSelectedFileUrl(fileUrl);
-
-                    onFileUploaded(file);
+                onFileUploaded(file);
         }, [ onFileUploaded ]);
-        const {
-            getRootProps,
-            getInputProps,
-                isDragActive
-        } = useDropzone({
-                onDrop
-            });
+        const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
             return (
-                <div
-                    className={ isDragActive ? "dropzone_active" : "dropzone" }
-                        { ...getRootProps() }
-                >
-                    <input
-                        { ...getInputProps() }
-                    />
+                <div className={ isDragActive ? "dropzone_active" : "dropzone" } { ...getRootProps() }>
+                    <input { ...getInputProps() }/>
 
                         {
-                            selectedFileUrl
+                            selectedFileUrl ?
+                                
+                                <img src={ selectedFileUrl} alt="Collect Point Thumbnail" />
 
-                                ?
-                            
-                                    <img
-                                        src={  selectedFileUrl}
-                                            alt="Collect Point Thumbnail"
-                                    />
-
-                                        :
-
-                                            <p>
-                                                <FiUpload/>
-                                                    Imagem do ponto de coleta 📸
-                                            </p>
+                            :   <p>
+                                    <FiUpload/>
+                                        Imagem do ponto de coleta 📸 
+                                </p>
                         }
                 </div>
             );

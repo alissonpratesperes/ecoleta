@@ -43,7 +43,7 @@ import api from "../../services/api";
                     "/items"
                 ).then(response => {
                     setItems(
-                        response.data.serializedItems
+                        response.data.items
                     );
                 });
             }, []);
@@ -185,212 +185,106 @@ import api from "../../services/api";
                 };
 
                     return (
-                        <div
-                            id="create_point"
-                        >
+                        <div id="create_point">
                             <header>
-                                <img
-                                    alt="Ecoleta"
-                                        src={ logo }
-                                />
-                                    <Link
-                                        to="/"
-                                    >
+                                <img alt="Ecoleta" src={ logo }/>
+                                    <Link to="/">
                                         <FiLogOut/>
-                                            <strong>
-                                                Voltar
-                                            </strong>
+                                            <strong> Voltar </strong>
                                     </Link>
                             </header>
-                                <form
-                                    onSubmit={ handleSubmit }
-                                >
-                                    <h1>
-                                        Cadastro do <br/> ponto de coleta.
-                                    </h1>
-
-                                        <Dropzone
-                                            onFileUploaded={ setSelectedFile }
-                                        />
-
-                                        <fieldset>
-                                            <legend>
-                                                <h2>
-                                                    Dados
-                                                </h2>
-                                            </legend>
-                                                <div
-                                                    className="field"
-                                                >
-                                                    <label
-                                                        htmlFor="name"
-                                                    >
-                                                        Nome da Entidade
-                                                    </label>
-                                                        <input
-                                                            type="text"
-                                                            name="name"
-                                                            id="name"
-                                                                onChange={ handleInputChange }
-                                                        />
-                                                </div>
-                                                <div
-                                                    className="field_group"
-                                                >
-                                                    <div
-                                                        className="field"
-                                                    >
-                                                        <label
-                                                            htmlFor="email"
-                                                        >
-                                                            E-mail
+                                <form onSubmit={ handleSubmit }>
+                                    <h1> Cadastro do <br/> ponto de coleta. </h1>
+                                        <Dropzone onFileUploaded={ setSelectedFile }/>
+                                            <fieldset>
+                                                <legend>
+                                                    <h2> Dados </h2>
+                                                </legend>
+                                                    <div className="field">
+                                                        <label htmlFor="name">
+                                                            Nome da Entidade
                                                         </label>
-                                                            <input
-                                                                type="email"
-                                                                name="email"
-                                                                id="email"
-                                                                    onChange={ handleInputChange }
-                                                            />
+                                                            <input type="text" name="name" id="name" onChange={ handleInputChange }/>
                                                     </div>
-                                                    <div
-                                                        className="field"
-                                                    >
-                                                        <label
-                                                            htmlFor="whatsapp"
-                                                        >
-                                                            WhatsApp
-                                                        </label>
-                                                            <input
-                                                                type="text"
-                                                                name="whatsapp"
-                                                                id="whatsapp"
-                                                                    onChange={ handleInputChange }
-                                                            />
-                                                    </div>
-                                                </div>
-                                        </fieldset>
-                                        <fieldset>
-                                            <legend>
-                                                <h2>
-                                                    Endereço
-                                                </h2>
-                                                    <span>
-                                                        Selecione o endereço no mapa
-                                                    </span>
-                                            </legend>
-                                                <MapContainer 
-                                                    center={ initialPosition }
-                                                        zoom={ 15 }
-                                                >
-                                                    <TileLayer
-                                                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                                    />
-                                                        <Marker
-                                                            position={ selectedPosition }
-                                                        />
-                                                            <HandleClickedCoordinates/>
-                                                                <HandleCoordinatesState 
-                                                                    centerMap={ initialPosition }
-                                                                />
-                                                </MapContainer>
-                                                    <div
-                                                        className="field_group"
-                                                    >
-                                                        <div
-                                                            className="field"
-                                                        >
-                                                            <label
-                                                                htmlFor="uf"
-                                                            >
-                                                                Unidade Federativa
+                                                    <div className="field_group">
+                                                        <div className="field">
+                                                            <label htmlFor="email">
+                                                                E-mail
                                                             </label>
-                                                                <select
-                                                                    name="uf"
-                                                                    id="uf"
-                                                                        value={ selectedFederativeUnit }
-                                                                        onChange={ handleSelectedFederativeUnit }
-                                                                >
-                                                                    <option value="0">
-                                                                        Selecione um Estado
-                                                                    </option>
-                                                                        { federativeUnits.map(federativeUnit => (
-                                                                            <option
-                                                                                key={ federativeUnit.sigla }
-                                                                                    value={ federativeUnit.sigla }
-                                                                            >
-                                                                                { federativeUnit.sigla } - { federativeUnit.nome }
-                                                                            </option>
-                                                                        )) }
-                                                                </select>
+                                                                <input type="email" name="email" id="email" onChange={ handleInputChange }/>
                                                         </div>
-                                                        <div
-                                                            className="field"
-                                                        >
-                                                            <label
-                                                                htmlFor="city"
-                                                            >
-                                                                Cidade
+                                                        <div className="field">
+                                                            <label htmlFor="whatsapp">
+                                                                WhatsApp
                                                             </label>
-                                                                <select
-                                                                    name="city"
-                                                                    id="city"
-                                                                        value={ selectedCity }
-                                                                        onChange={ handleSelectedCity }
-                                                                >
-                                                                    <option value="0">
-                                                                        Selecione uma Cidade
-                                                                    </option>
-                                                                        { cities.map(city => (
-                                                                            <option
-                                                                                key={ city.nome }
-                                                                                    value={ city.nome }
-                                                                            >
-                                                                                { city.nome }
-                                                                            </option>
-                                                                        )) }
-                                                                </select>
+                                                                <input type="text" name="whatsapp" id="whatsapp" onChange={ handleInputChange }/>
                                                         </div>
                                                     </div>
-                                        </fieldset>
-                                        <fieldset>
-                                            <legend>
-                                                <h2>
-                                                    Itens de Coleta
-                                                </h2>
+                                            </fieldset>
+                                            <fieldset>
+                                                <legend>
+                                                    <h2> Endereço </h2>
+                                                        <span> Selecione o endereço no mapa </span>
+                                                </legend>
+                                                    <MapContainer center={ initialPosition } zoom={ 15 }>
+                                                        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+                                                            <Marker position={ selectedPosition }/>
+                                                                <HandleClickedCoordinates/>
+                                                                    <HandleCoordinatesState centerMap={ initialPosition }/>
+                                                    </MapContainer>
+                                                        <div className="field_group">
+                                                            <div className="field">
+                                                                <label htmlFor="uf">
+                                                                    Unidade Federativa
+                                                                </label>
+                                                                    <select name="uf" id="uf" value={ selectedFederativeUnit } onChange={ handleSelectedFederativeUnit }>
+                                                                        <option value="0">
+                                                                            Selecione um Estado
+                                                                        </option>
+                                                                            { federativeUnits.map(federativeUnit => (
+                                                                                <option key={ federativeUnit.sigla } value={ federativeUnit.sigla }>
+                                                                                    { federativeUnit.sigla } - { federativeUnit.nome }
+                                                                                </option>
+                                                                            )) }
+                                                                    </select>
+                                                            </div>
+                                                            <div className="field">
+                                                                <label htmlFor="city">
+                                                                    Cidade
+                                                                </label>
+                                                                    <select name="city" id="city" value={ selectedCity } onChange={ handleSelectedCity }>
+                                                                        <option value="0">
+                                                                            Selecione uma Cidade
+                                                                        </option>
+                                                                            { cities.map(city => (
+                                                                                <option key={ city.nome } value={ city.nome }>
+                                                                                    { city.nome }
+                                                                                </option>
+                                                                            )) }
+                                                                    </select>
+                                                            </div>
+                                                        </div>
+                                            </fieldset>
+                                            <fieldset>
+                                                <legend>
+                                                    <h2> Itens de Coleta </h2>
+                                                        <span> Selecione um ou mais itens abaixo </span>
+                                                </legend>
+                                                    <ul className="items_grid">
+                                                        { items.map(item => (
+                                                            <li key={ item.id } className={ selectedItems.includes(item.id) ? "selected" : "" } onClick={ () => handleSelectItem(item.id) }>
+                                                                <img alt={ item.title } src={ item.image_url }/>
+                                                                    <span> { item.title } </span>
+                                                            </li>
+                                                        )) }
+                                                    </ul>
+                                            </fieldset>
+                                                <button type="submit">
                                                     <span>
-                                                        Selecione um ou mais itens abaixo
+                                                        <FiSave/>
                                                     </span>
-                                            </legend>
-                                                <ul
-                                                    className="items_grid"
-                                                >
-                                                    { items.map(item => (
-                                                        <li
-                                                            key={ item.id }
-                                                                onClick={ () => handleSelectItem(item.id) }
-                                                                    className={ selectedItems.includes(item.id) ? "selected" : "" }
-                                                        >
-                                                            <img
-                                                                alt={ item.title }
-                                                                    src={ item.image_url }
-                                                            />
-                                                                <span>
-                                                                    { item.title }
-                                                                </span>
-                                                        </li>
-                                                    )) }
-                                                </ul>
-                                        </fieldset>
-                                            <button
-                                                type="submit"
-                                            >
-                                                <span>
-                                                    <FiSave/>
-                                                </span>
-                                                    <strong>
-                                                        Cadastrar ponto de coleta
-                                                    </strong>
-                                            </button>
+                                                        <strong> Cadastrar ponto de coleta </strong>
+                                                </button>
                                 </form>
                         </div>
                     );
