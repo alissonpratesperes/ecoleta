@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
                 navigation.navigate(
                     "Points" as never, {
                         typedFederativeUnit,
-                            typedCity
+                        typedCity
                     } as never
                 );
             };

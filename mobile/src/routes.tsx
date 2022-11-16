@@ -12,12 +12,12 @@ import Detail from "./pages/Detail";
         return (
             <NavigationContainer>
                 <AppStack.Navigator
-                    screenOptions={ {
+                    screenOptions={{
                         headerShown: false,
                             cardStyle: {
                                 backgroundColor: "#F0F0F5"
                             }
-                    } }
+                    }}
                 >
                     <AppStack.Screen
                         name="Home"

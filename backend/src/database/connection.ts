@@ -5,9 +5,7 @@ import path from "path";
         client: "sqlite3",
 
             connection: {
-                filename: path.resolve(
-                    __dirname, "database.sqlite"
-                )
+                filename: path.resolve(__dirname, "database.sqlite")
             },
 
                 useNullAsDefault: true

@@ -8,9 +8,9 @@ interface Data {
         city: string;
         uf: string;
     };
-    items: {
-        title: string;
-    }[];
+        items: {
+            title: string;
+        }[];
 };
 
     export default Data;

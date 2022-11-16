@@ -9,7 +9,7 @@ import knex from "../database/connection";
                 uf,
                 items
             } = request.query;
-
+            
             const parsedItems = String(items)
                 .split(",")
                 .map((item: any) =>
