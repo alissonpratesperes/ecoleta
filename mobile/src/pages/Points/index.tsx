@@ -68,7 +68,7 @@ import api from "../../services/api";
                     "/items"
                 ).then(response => {
                     setItems(
-                        response.data.serializedItems
+                        response.data.items
                     );
                 });
             }, []);
