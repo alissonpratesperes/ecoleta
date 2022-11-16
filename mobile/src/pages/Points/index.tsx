@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import Constants from "expo-constants";
 import { View, StyleSheet, TouchableOpacity, Text, ScrollView, Image, Alert } from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import MapView, { Marker } from "react-native-maps";
 import { SvgUri } from "react-native-svg";
 import * as Location from "expo-location";
 
+import Params from "../../interfaces/Params";
 import Point from "../../interfaces/Point";
 import Item from "../../interfaces/Item";
 import api from "../../services/api";
@@ -17,6 +18,8 @@ import api from "../../services/api";
         const [ selectedItems, setSelectedItems ] = useState<number[]>([]);
         const [ initialPosition, setInitialPosition ] = useState<[number, number]>([0, 0]);
         const navigation = useNavigation();
+        const route = useRoute();
+        const routeParams = route.params as Params;
 
             useEffect(() => {
                 async function loadPosition() {
@@ -50,16 +53,16 @@ import api from "../../services/api";
             useEffect(() => {
                 api.get("/points", {
                     params: {
-                        city: "São Marcos",
-                        uf: "RS",
-                        items: [6, 1]
+                        city: routeParams.typedCity,
+                        uf: routeParams.typedFederativeUnit,
+                        items: selectedItems
                     }
                 }).then(response => {
                     setPoints(
                         response.data.points
                     );
                 });
-            }, []);
+            }, [ selectedItems ]);
             useEffect(() => {
                 api.get(
                     "/items"

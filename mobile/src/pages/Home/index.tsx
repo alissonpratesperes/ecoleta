@@ -1,15 +1,20 @@
-import React from "react";
-import { View, Image, StyleSheet, Text, ImageBackground } from "react-native";
+import React, { useState } from "react";
+import { View, Image, StyleSheet, Text, ImageBackground, TextInput } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { Feather as Icon } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
     const Home = () => {
+        const [ typedFederativeUnit, setTypedFederativeUnit ] = useState("");
+        const [ typedCity, setTypedCity ] = useState("");
         const navigation = useNavigation();
 
             function handleNavigateToPoints() {
                 navigation.navigate(
-                    "Points" as never
+                    "Points" as never, {
+                        typedFederativeUnit,
+                        typedCity
+                    } as never
                 );
             };
 
@@ -40,27 +45,43 @@ import { useNavigation } from "@react-navigation/native";
                                 </Text>
                         </View>
                             <View>
-                                <RectButton
-                                    style={ styles.button }
-                                        onPress={ handleNavigateToPoints }
-                                >
-                                    <View
-                                        style={ styles.buttonIcon }
+                                <TextInput
+                                    style={[ styles.firstInput, styles.input ]}
+                                        placeholder="Digite o Estado"
+                                            maxLength={ 2 }
+                                                autoCapitalize="characters"
+                                                    autoCorrect={ false }
+                                                        value={ typedFederativeUnit }
+                                                            onChangeText={ setTypedFederativeUnit }
+                                />
+                                <TextInput
+                                    style={ styles.input }
+                                        placeholder="Digite a Cidade"
+                                            autoCorrect={ false }
+                                                value={ typedCity }
+                                                    onChangeText={ setTypedCity }
+                                />
+                                    <RectButton
+                                        style={ styles.button }
+                                            onPress={ handleNavigateToPoints }
                                     >
-                                        <Text>
-                                            <Icon
-                                                name="log-in"
-                                                size={ 25 }
-                                                color="#FFFFFF"
-                                            />
-                                        </Text> 
-                                    </View>
-                                        <Text
-                                            style={ styles.buttonText }
+                                        <View
+                                            style={ styles.buttonIcon }
                                         >
-                                            Entrar
-                                        </Text>
-                                </RectButton>
+                                            <Text>
+                                                <Icon
+                                                    name="log-in"
+                                                    size={ 25 }
+                                                    color="#FFFFFF"
+                                                />
+                                            </Text> 
+                                        </View>
+                                            <Text
+                                                style={ styles.buttonText }
+                                            >
+                                                Entrar
+                                            </Text>
+                                    </RectButton>
                             </View>
                     </ImageBackground>
                 );
@@ -92,6 +113,18 @@ import { useNavigation } from "@react-navigation/native";
                 fontSize: 16,
                 color: "#6C6C80",
                 lineHeight: 24
+            },
+
+            firstInput: {
+                marginBottom: 15
+            },
+
+            input: {
+                paddingHorizontal: 24,
+                height: 60,
+                fontSize: 16,
+                backgroundColor: "#FFFFFF",
+                borderRadius: 10
             },
 
             button: {
