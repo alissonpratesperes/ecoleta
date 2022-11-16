@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import path from "path";
+import { errors } from "celebrate";
 
 import routes from "./routes";
 
@@ -32,6 +33,10 @@ import routes from "./routes";
                 )
         );
 
-            app.listen(
-                3333
+            app.use(
+                errors()
             );
+
+                app.listen(
+                    3333
+                );
