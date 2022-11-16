@@ -11,74 +11,35 @@ import { useNavigation } from "@react-navigation/native";
 
             function handleNavigateToPoints() {
                 navigation.navigate(
-                    "Points" as never, {
-                        typedFederativeUnit,
-                        typedCity
-                    } as never
+                    "Points" as never,
+                        {
+                            typedFederativeUnit,
+                            typedCity
+                        } as never
                 );
             };
 
                 return (
-                    <ImageBackground
-                        style={ styles.container }
-                            source={ require("../../assets/home-background.png") }
-                                imageStyle={{
-                                    height: 368,
-                                    width: 274
-                                }}
-                    >
-                        <View
-                            style={ styles.main }
-                        >
-                            <Image
-                                source={ require("../../assets/logo.png") }
-                            />
-                                <Text
-                                    style={ styles.slogan }
-                                >
+                    <ImageBackground style={ styles.container } source={ require("../../assets/home-background.png") } imageStyle={{ height: 368, width: 274 }}>
+                        <View style={ styles.main }>
+                            <Image source={ require("../../assets/logo.png") }/>
+                                <Text style={ styles.slogan }>
                                     Seu marketplace de coleta de resíduos.
                                 </Text>
-                                <Text
-                                    style={ styles.description }    
-                                >
+                                <Text style={ styles.description }>
                                     Ajudamos pessoas a encontrarem pontos de coleta de forma eficiente.
                                 </Text>
                         </View>
                             <View>
-                                <TextInput
-                                    style={[ styles.firstInput, styles.input ]}
-                                        placeholder="Digite o Estado"
-                                            maxLength={ 2 }
-                                                autoCapitalize="characters"
-                                                    autoCorrect={ false }
-                                                        value={ typedFederativeUnit }
-                                                            onChangeText={ setTypedFederativeUnit }
-                                />
-                                <TextInput
-                                    style={ styles.input }
-                                        placeholder="Digite a Cidade"
-                                            autoCorrect={ false }
-                                                value={ typedCity }
-                                                    onChangeText={ setTypedCity }
-                                />
-                                    <RectButton
-                                        style={ styles.button }
-                                            onPress={ handleNavigateToPoints }
-                                    >
-                                        <View
-                                            style={ styles.buttonIcon }
-                                        >
+                                <TextInput style={[ styles.firstInput, styles.input ]} placeholder="Digite o Estado" maxLength={ 2 } autoCapitalize="characters" autoCorrect={ false } value={ typedFederativeUnit } onChangeText={ setTypedFederativeUnit }/>
+                                <TextInput style={ styles.input } placeholder="Digite a Cidade" autoCorrect={ false } value={ typedCity } onChangeText={ setTypedCity }/>
+                                    <RectButton style={ styles.button } onPress={ handleNavigateToPoints }>
+                                        <View style={ styles.buttonIcon }>
                                             <Text>
-                                                <Icon
-                                                    name="log-in"
-                                                        size={ 25 }
-                                                            color="#FFFFFF"
-                                                />
+                                                <Icon name="log-in" size={ 25 } color="#FFFFFF"/>
                                             </Text> 
                                         </View>
-                                            <Text
-                                                style={ styles.buttonText }
-                                            >
+                                            <Text style={ styles.buttonText }>
                                                 Entrar
                                             </Text>
                                     </RectButton>

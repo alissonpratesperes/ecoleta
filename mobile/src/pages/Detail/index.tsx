@@ -46,93 +46,45 @@ import api from "../../services/api";
 
                         return (
                             <>
-                                <View
-                                    style={ styles.container }
-                                >
-                                    <TouchableOpacity
-                                        style={ styles.navigation }
-                                            onPress={ handleNavigateBack }
-                                    >
-                                        <Icon
-                                            name="log-out"
-                                                size={ 25 }
-                                                    color="#34CB79"
-                                        />
-                                            <Text
-                                                style={ styles.navigationText }
-                                            >
+                                <View style={ styles.container }>
+                                    <TouchableOpacity style={ styles.navigation } onPress={ handleNavigateBack }>
+                                        <Icon name="log-out" size={ 25 } color="#34CB79"/>
+                                            <Text style={ styles.navigationText }>
                                                 Voltar
                                             </Text>
                                     </TouchableOpacity>
-                                        <View
-                                            style={ styles.subContainerContent }
-                                        >
-                                            <Image
-                                                style={ styles.pointImage }
-                                                    source={{
-                                                        uri: data.point.image_url
-                                                    }}
-                                            />
-                                                <Text
-                                                    style={ styles.pointName }
-                                                >
+                                        <View style={ styles.subContainerContent }>
+                                            <Image style={ styles.pointImage } source={{ uri: data.point.image_url }}/>
+                                                <Text style={ styles.pointName }>
                                                     { data.point.name }
                                                 </Text>
-                                                <Text
-                                                    style={ styles.pointItems }
-                                                >
+                                                <Text style={ styles.pointItems }>
                                                     { data.items.map(item =>
                                                         item.title
                                                     ).join(
                                                         ", "
                                                     ) }
                                                 </Text>
-                                                    <View
-                                                        style={ styles.address }
-                                                    >
-                                                        <Text
-                                                            style={ styles.addressTitle }
-                                                        >
+                                                    <View style={ styles.address }>
+                                                        <Text style={ styles.addressTitle }>
                                                             Endereço
                                                         </Text>
-                                                        <Text
-                                                            style={ styles.addressContent }
-                                                        >
+                                                        <Text style={ styles.addressContent }>
                                                             { data.point.city }, { data.point.uf }
                                                         </Text>
                                                     </View>
                                         </View>
                                 </View>
-                                <View
-                                    style={ styles.footer }
-                                >
-                                    <RectButton
-                                        style={ styles.button }
-                                            onPress={ handleComposeWhatsApp }
-                                    >
-                                        <FaIcon
-                                            name="whatsapp"
-                                                size={ 25 }
-                                                    color="#FFFFFF"
-                                        />
-                                            <Text
-                                                style={ styles.buttonText }
-                                            >
+                                <View style={ styles.footer }>
+                                    <RectButton style={ styles.button } onPress={ handleComposeWhatsApp }>
+                                        <FaIcon name="whatsapp" size={ 25 } color="#FFFFFF"/>
+                                            <Text style={ styles.buttonText }>
                                                 WhatsApp
                                             </Text>
                                     </RectButton>
-                                    <RectButton
-                                        style={ styles.button }
-                                            onPress={ handleComposeMail }
-                                    >
-                                        <Icon
-                                            name="mail"
-                                                size={ 25 }
-                                                    color="#FFFFFF"
-                                        />
-                                            <Text
-                                                style={ styles.buttonText }
-                                            >
+                                    <RectButton style={ styles.button } onPress={ handleComposeMail }>
+                                        <Icon name="mail" size={ 25 } color="#FFFFFF"/>
+                                            <Text style={ styles.buttonText }>
                                                 E-mail
                                             </Text>
                                     </RectButton>

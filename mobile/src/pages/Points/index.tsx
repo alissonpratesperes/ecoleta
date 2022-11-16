@@ -108,72 +108,28 @@ import api from "../../services/api";
 
                     return (
                         <>
-                            <View
-                                style={ styles.container }
-                            >
-                                <TouchableOpacity
-                                    style={ styles.navigation }
-                                        onPress={ handleNavigateBack }
-                                >
-                                    <Icon
-                                        name="log-out"
-                                            size={ 25 }
-                                                color="#34CB79"
-                                    />
-                                        <Text
-                                            style={ styles.navigationText }
-                                        >
+                            <View style={ styles.container }>
+                                <TouchableOpacity style={ styles.navigation } onPress={ handleNavigateBack }>
+                                    <Icon name="log-out" size={ 25 } color="#34CB79"/>
+                                        <Text style={ styles.navigationText }>
                                             Voltar
                                         </Text>
                                 </TouchableOpacity>
-                                    <View
-                                        style={ styles.subContainerContent }
-                                    >
-                                        <Text
-                                            style={ styles.title }
-                                        >
+                                    <View style={ styles.subContainerContent }>
+                                        <Text style={ styles.title }>
                                             😃 Bem-vindo.
                                         </Text>
-                                        <Text
-                                            style={ styles.description }
-                                        >
+                                        <Text style={ styles.description }>
                                             Encontre no mapa um ponto de coleta.
                                         </Text>
-                                            <View
-                                                style={ styles.mapContainer }
-                                            >
+                                            <View style={ styles.mapContainer }>
                                                 { initialPosition[0] !== 0 && (
-                                                    <MapView
-                                                        style={ styles.map }
-                                                            initialRegion={{
-                                                                latitude: initialPosition[0],
-                                                                longitude: initialPosition[1],
-                                                                    latitudeDelta: 0.014,
-                                                                    longitudeDelta: 0.014
-                                                            }}
-                                                    >
+                                                    <MapView style={ styles.map } initialRegion={{ latitude: initialPosition[0], longitude: initialPosition[1], latitudeDelta: 0.014, longitudeDelta: 0.014 }}>
                                                         { points.map(point => (
-                                                            <Marker
-                                                                style={ styles.mapMarker }
-                                                                    key={ String(point.id) }
-                                                                        coordinate={{
-                                                                            latitude: point.latitude,
-                                                                            longitude: point.longitude
-                                                                        }}
-                                                                            onPress={ () => handleNavigateToDetail(point.id) }
-                                                            >
-                                                                <View
-                                                                    style={ styles.mapMarkerContainer }
-                                                                >
-                                                                    <Image
-                                                                        style={ styles.mapMarkerImage }
-                                                                            source={{
-                                                                                uri: point.image_url
-                                                                            }}
-                                                                    />
-                                                                        <Text
-                                                                            style={ styles.mapMarkerTitle }
-                                                                        >
+                                                            <Marker style={ styles.mapMarker } key={ String(point.id) } coordinate={{ latitude: point.latitude, longitude: point.longitude }} onPress={ () => handleNavigateToDetail(point.id) }>
+                                                                <View style={ styles.mapMarkerContainer }>
+                                                                    <Image style={ styles.mapMarkerImage } source={{ uri: point.image_url }}/>
+                                                                        <Text style={ styles.mapMarkerTitle }>
                                                                             { point.name }
                                                                         </Text>
                                                                 </View>
@@ -184,37 +140,13 @@ import api from "../../services/api";
                                             </View>
                                     </View>
                             </View>
-                            <View
-                                style={ styles.subContainerItems }
-                            >
-                                <View
-                                    style={ styles.itemsContainer }
-                                >
-                                    <ScrollView
-                                        horizontal
-                                            showsHorizontalScrollIndicator={ false }
-                                                contentContainerStyle={{
-                                                    paddingHorizontal: 30
-                                                }}
-                                    >
+                            <View style={ styles.subContainerItems }>
+                                <View style={ styles.itemsContainer }>
+                                    <ScrollView horizontal showsHorizontalScrollIndicator={ false } contentContainerStyle={{ paddingHorizontal: 30 }}>
                                         { items.map(item => (
-                                            <TouchableOpacity
-                                                style={[
-                                                    styles.item,
-                                                        selectedItems.includes(item.id) ? styles.selectedItem : { }
-                                                ]}
-                                                    activeOpacity={ 0.6 }
-                                                        key={ String(item.id) }
-                                                            onPress={ () => handleSelectItem(item.id) }
-                                            >
-                                                <SvgUri
-                                                    height={ 50 }
-                                                        width={ 50 }
-                                                            uri={ item.image_url }
-                                                />
-                                                    <Text
-                                                        style={ styles.itemTitle }
-                                                    >
+                                            <TouchableOpacity style={[ styles.item, selectedItems.includes(item.id) ? styles.selectedItem : { } ]} activeOpacity={ 0.6 } key={ String(item.id) } onPress={ () => handleSelectItem(item.id) }>
+                                                <SvgUri height={ 50 } width={ 50 } uri={ item.image_url }/>
+                                                    <Text style={ styles.itemTitle }>
                                                         { item.title }
                                                     </Text>
                                             </TouchableOpacity>
