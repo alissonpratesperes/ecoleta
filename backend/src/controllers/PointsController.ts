@@ -31,7 +31,7 @@ import knex from "../database/connection";
             });
 
                 return response.status(200).json({
-                    serializedPoints
+                    points: serializedPoints
                 });
         };
 
@@ -63,7 +63,7 @@ import knex from "../database/connection";
 
                 return response.status(200).json({
                     point: serializedPoint,
-                    items
+                        items
                 });
         };
 

@@ -4,6 +4,7 @@ import { FiLogOut, FiSave } from "react-icons/fi";
 import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from "react-leaflet";
 import axios from "axios";
 
+import Dropzone from "../../components/Dropzone";
 import Item from "../../interfaces/Item";
 import FederativeUnit from "../../interfaces/FederativeUnit";
 import City from "../../interfaces/City";
@@ -21,6 +22,7 @@ import api from "../../services/api";
         const [ selectedPosition, setSelectedPosition ] = useState<[number, number]>([0, 0]);
         const [ inputData, setInputData ] = useState({ name: "", email: "", whatsapp: "" });
         const [ selectedItems, setSelectedItems ] = useState<number[]>([]);
+        const [ selectedFile, setSelectedFile ] = useState<File>();
         const navigate = useNavigate();
 
             useEffect(() => {
@@ -156,25 +158,30 @@ import api from "../../services/api";
                         const city = selectedCity;
                         const uf = selectedFederativeUnit;
                         const items = selectedItems;
-                        const data = {
-                            name,
-                            email,
-                            whatsapp,
-                            latitude,
-                            longitude,
-                            city,
-                            uf,
-                            items
-                        };
 
-                            await api.post(
-                                "/points",
-                                    data
-                            );
+                        const data = new FormData();
 
-                                alert("Ponto de Coleta criado, com sucesso! ✅");
+                            if(selectedFile) {
+                                data.append("image", selectedFile);
+                            };
 
-                                    navigate("/");
+                                data.append("name", name);
+                                data.append("email", email);
+                                data.append("whatsapp", whatsapp);
+                                data.append("latitude", String(latitude));
+                                data.append("longitude", String(longitude));
+                                data.append("uf", uf);
+                                data.append("city", city);
+                                data.append("items", items.join(","));
+                            
+                                    await api.post(
+                                        "/points",
+                                            data
+                                    );
+
+                                        alert("Ponto de Coleta criado, com sucesso! ✅");
+
+                                            navigate("/");
                 };
 
                     return (
@@ -201,6 +208,11 @@ import api from "../../services/api";
                                     <h1>
                                         Cadastro do <br/> ponto de coleta.
                                     </h1>
+
+                                        <Dropzone
+                                            onFileUploaded={ setSelectedFile }
+                                        />
+
                                         <fieldset>
                                             <legend>
                                                 <h2>

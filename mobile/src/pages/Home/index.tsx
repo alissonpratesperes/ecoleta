@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
                 navigation.navigate(
                     "Points" as never, {
                         typedFederativeUnit,
-                        typedCity
+                            typedCity
                     } as never
                 );
             };
@@ -71,8 +71,8 @@ import { useNavigation } from "@react-navigation/native";
                                             <Text>
                                                 <Icon
                                                     name="log-in"
-                                                    size={ 25 }
-                                                    color="#FFFFFF"
+                                                        size={ 25 }
+                                                            color="#FFFFFF"
                                                 />
                                             </Text> 
                                         </View>

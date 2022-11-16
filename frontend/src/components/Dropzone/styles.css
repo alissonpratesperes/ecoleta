@@ -1,0 +1,78 @@
+div.dropzone {
+    margin-top: 60px;
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #F0F0F5;
+    border: 2px solid #F0F0F5;
+    border-radius: 10px;
+    outline: 0px;
+}
+
+div.dropzone img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+div.dropzone p {
+    height: calc(100% - 60px);
+    width: calc(100% - 60px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #6C6C80;
+    border-radius: 10px;
+}
+
+div.dropzone p svg {
+    margin-bottom: 20px;
+    height: 25px;
+    width: 25px;
+    color: #4ECB79;
+}
+
+div.dropzone_active {
+    margin-top: 60px;
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #E1FAEC;
+    border: 2px solid #4ECB79;
+    border-radius: 10px;
+    outline: 0px;
+}
+
+div.dropzone_active img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+div.dropzone_active p {
+    height: calc(100% - 60px);
+    width: calc(100% - 60px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+    border-radius: 10px;
+}
+
+div.dropzone_active p svg {
+    margin-bottom: 20px;
+    height: 25px;
+    width: 25px;
+    color: #4ECB79;
+}
