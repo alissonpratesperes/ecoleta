@@ -1,6 +1,6 @@
 ___
 <p align="center">
-    <img src="github/ecoleta_logo.svg" width="40%"/>
+    <img src="github/ecoleta_logo.svg" width="50%"/>
 </p>
     <br/>
 <p align="center">
@@ -21,6 +21,9 @@ ___
     <a href="#memo-licença">Licença</a>
 </p>
     <br/>
+<p align="center">
+    <img src="github/ecoleta_dashboard.png" width="100%">
+</p>
 
 ## :dart: Sobre
 
