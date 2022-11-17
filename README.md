@@ -41,15 +41,15 @@ Essa Aplicação foi desenvolvida utilizando as seguintes tecnologias:
 
 ## :electric_plug: Execute
 
-	- Clonar o Repositório;
-    - Instalar as Dependências do Back-End com o Comando: "npm install";
+	- Clonar o Repositório:
+    - Instalar as Dependências do Back-End com o Comando: "npm install":
         |- Criar o Banco de Dados com o Comando: "npm run knex:migrate";
         |- Criar os Itens de Coleta com o Comando: "npm run knex:seed";
             >_ Inicializar o Back-End com o Comando: "npm run dev".
-    - Instalar as Dependências do Front-End com o Comando: "npm install";
+    - Instalar as Dependências do Front-End com o Comando: "npm install":
         |- "./frontend/src/services/api.ts:4" - Alterar o endereço de conexão do Front-End;
             >_ Inicializar o Front-End com o Comando: "npm start".
-    - Instalar as Dependências do Mobile com o Comando: "npm install";
+    - Instalar as Dependências do Mobile com o Comando: "npm install":
         |- "./mobile/src/services/api.ts:4" - Alterar o Endereço de Conexão do Mobile;
             >_ Inicializar o Mobile com o Comando: "expo start".
 
