@@ -25,3 +25,16 @@ ___
 ## :dart: Sobre
 
 A **Ecoleta** é uma Aplicação envolvendo um marketplace que ajuda pessoas a encontrarem pontos de coleta de resíduos de forma eficiente.
+
+## :battery: Tecnologias
+Essa Aplicação foi desenvolvida utilizando as seguintes tecnologias:
+
+- <a href="https://insomnia.rest/">Insomnia</a>
+- <a href="https://sqlite.org/">SQLite 3</a>
+- <a href="https://knexjs.org/">KnexJS</a>
+- <a href="https://www.typescriptlang.org/">TypeScript</a>
+- <a href="https://nodejs.org/">NodeJS</a>
+- <a href="https://axios-http.com/">Axios</a>
+- <a href="https://reactjs.org/">ReactJS</a>
+- <a href="https://expo.dev/">Expo IO</a>
+- <a href="https://reactnative.dev/">React Native</a>
