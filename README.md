@@ -20,3 +20,8 @@ ___
     <a href="#fuelpump-autor">Autor</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
     <a href="#memo-licença">Licença</a>
 </p>
+    <br/>
+
+## :dart: Sobre
+
+A **Ecoleta** é uma Aplicação envolvendo um marketplace que ajuda pessoas a encontrarem pontos de coleta de resíduos de forma eficiente.
