@@ -26,7 +26,7 @@ TOOLING | <a href="https://insomnia.rest/">Insomnia</a> • <a href="https://exp
 
 DATABASE | <a href="https://sqlite.org/">SQLite 3</a> • <a href="https://knexjs.org/">KnexJS</a>
 
-INTEGRATION | <a href="https://axios-http.com/">Axios</a>
+INTEGRATION | <a href="https://expressjs.com/">Express</a> • <a href="https://axios-http.com/">Axios</a>
 
 BACK-END | <a href="https://nodejs.org/">NodeJS</a> • <a href="https://www.typescriptlang.org/">TypeScript</a>
 
